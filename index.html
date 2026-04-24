@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prolific Vintage — Tokyo-Curated Fashion</title>
+<meta name="description" content="東京からセレクトしたヴィンテージストリートウェア。BAPE、UNDERCOVER、HYSTERIC GLAMOURなど厳選アイテムを世界発送。"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --white: #ffffff;
+  --black: #0c0c0c;
+  --gray-1: #f5f5f5;
+  --gray-2: #e8e8e8;
+  --gray-3: #b0b0b0;
+  --gray-4: #666666;
+  --serif: 'Playfair Display', serif;
+  --sans: 'Jost', sans-serif;
+}
+body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+
+/* ── TICKER ── */
+.ticker { background: var(--black); color: var(--white); padding: 9px 0; overflow: hidden; white-space: nowrap; }
+.ticker-inner { display: inline-block; animation: ticker 30s linear infinite; }
+.ticker-inner span { margin: 0 40px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; }
+.ticker-inner .dot { color: var(--gray-3); }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── NAV ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 64px;
+  border-bottom: 1px solid var(--gray-2);
+  position: sticky; top: 0;
+  background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); z-index: 200;
+}
+.nav-left, .nav-right { display: flex; gap: 32px; align-items: center; }
+.nav-link { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; color: var(--black); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; }
+.nav-link:hover { opacity: 1; }
+.nav-logo { font-family: var(--serif); font-size: 28px; font-weight: 400; letter-spacing: 0.04em; color: var(--black); position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; text-decoration: none; }
+.cart-btn { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; background: none; border: none; cursor: pointer; color: var(--black); display: flex; align-items: center; gap: 8px; opacity: 0.55; transition: opacity 0.2s; font-family: var(--sans); }
+.cart-btn:hover { opacity: 1; }
+.cart-count-badge { width: 15px; height: 15px; background: var(--black); color: var(--white); font-size: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+/* ── SECTION HEADER ── */
+.section-head { padding: 56px 40px 32px; display: flex; justify-content: space-between; align-items: baseline; }
+.section-title { font-family: var(--serif); font-size: 13px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; }
+.item-count { font-size: 10px; color: var(--gray-3); letter-spacing: 0.12em; }
+
+/* ── PRODUCT GRID ── */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-left: 1px solid var(--gray-2);
+}
+
+/* ── PRODUCT CARD ── */
+.product-card {
+  border-right: 1px solid var(--gray-2);
+  border-bottom: 1px solid var(--gray-2);
+  cursor: pointer; position: relative; overflow: hidden;
+  background: var(--gray-1);
+}
+.product-card:focus-visible { outline: 2px solid var(--black); }
+
+.product-img {
+  height: 320px; position: relative; overflow: hidden;
+}
+.product-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.product-card:hover .product-img img { transform: scale(1.04); }
+
+/* Hover overlay */
+.product-hover {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-end; padding: 20px;
+  opacity: 0; transition: opacity 0.25s;
+}
+.product-card:hover .product-hover { opacity: 1; }
+.hover-cta {
+  width: 100%;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--white); color: var(--black);
+  border: none; padding: 11px; cursor: pointer;
+  font-family: var(--sans);
+}
+
+/* Grade badge */
+.grade-badge {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 3px 8px; font-family: var(--sans); background: rgba(255,255,255,0.9);
+}
+.grade-B { background: rgba(12,12,12,0.85); color: var(--white); }
+
+/* Card info */
+.product-info { padding: 14px 18px 18px; }
+.product-brand { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 5px; }
+.product-name { font-family: var(--serif); font-size: 14px; font-weight: 400; line-height: 1.3; margin-bottom: 6px; }
+.product-footer { display: flex; justify-content: space-between; align-items: center; }
+.product-size { font-size: 10px; letter-spacing: 0.08em; color: var(--gray-4); }
+.product-price { font-family: var(--serif); font-size: 14px; font-weight: 400; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+  z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.22s;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); max-width: 1040px; width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  max-height: 92vh; overflow: hidden;
+  transform: translateY(14px); transition: transform 0.22s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+
+/* Gallery side */
+.modal-gallery {
+  position: relative; background: var(--gray-1);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.modal-main-img {
+  flex: 1; position: relative; overflow: hidden; min-height: 0;
+}
+.modal-main-img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block; transition: opacity 0.18s;
+}
+.modal-main-img img.fading { opacity: 0; }
+
+/* Prev / Next arrows */
+.gal-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.88); border: none; cursor: pointer;
+  width: 36px; height: 36px; font-size: 16px; z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; line-height: 1;
+}
+.gal-arrow:hover { background: var(--white); }
+.gal-prev { left: 12px; }
+.gal-next { right: 12px; }
+.gal-arrow.hidden { display: none; }
+
+/* Image counter */
+.gal-counter {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  font-size: 9px; letter-spacing: 0.15em; color: rgba(0,0,0,0.45);
+  background: rgba(255,255,255,0.8); padding: 3px 10px;
+  font-family: var(--sans); z-index: 3; white-space: nowrap;
+}
+
+/* Thumbnail strip */
+.modal-thumbs {
+  display: flex; gap: 3px; padding: 3px;
+  overflow-x: auto; flex-shrink: 0;
+  background: var(--white);
+  scrollbar-width: none;
+}
+.modal-thumbs::-webkit-scrollbar { display: none; }
+.modal-thumb {
+  width: 56px; height: 68px; flex-shrink: 0;
+  cursor: pointer; overflow: hidden; opacity: 0.5;
+  transition: opacity 0.18s; border: 2px solid transparent;
+}
+.modal-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.modal-thumb.active { opacity: 1; border-color: var(--black); }
+.modal-thumb:hover { opacity: 0.85; }
+
+/* Close button */
+.modal-close {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(255,255,255,0.92); border: none; cursor: pointer;
+  width: 30px; height: 30px; font-size: 17px;
+  display: flex; align-items: center; justify-content: center; z-index: 4;
+}
+
+/* Info side */
+.modal-body { padding: 36px 32px 32px; overflow-y: auto; display: flex; flex-direction: column; }
+.modal-eyebrow { font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 10px; }
+.modal-name { font-family: var(--serif); font-size: 22px; font-weight: 400; line-height: 1.2; margin-bottom: 8px; }
+.modal-price { font-family: var(--serif); font-size: 26px; margin-bottom: 18px; }
+.modal-grade-tag { display: inline-block; font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; padding: 4px 12px; margin-bottom: 22px; background: var(--gray-2); }
+.modal-grade-tag.b { background: var(--black); color: var(--white); }
+.modal-divider { border: none; border-top: 1px solid var(--gray-2); margin: 18px 0 13px; }
+.modal-label { font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 11px; }
+.modal-size-tag { display: inline-block; font-size: 10px; letter-spacing: 0.1em; border: 1px solid var(--gray-2); padding: 6px 16px; }
+.modal-meas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; margin-top: 4px; }
+.meas-row { display: flex; justify-content: space-between; }
+.meas-l { font-size: 10px; color: var(--gray-4); letter-spacing: 0.05em; }
+.meas-v { font-family: var(--serif); font-size: 13px; }
+.modal-cond-text { font-size: 11px; line-height: 1.8; color: var(--gray-4); font-weight: 300; }
+.modal-add {
+  margin-top: 28px;
+  width: 100%; background: var(--black); color: var(--white);
+  border: none; padding: 14px; font-family: var(--sans);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  cursor: pointer; transition: opacity 0.2s; flex-shrink: 0;
+}
+.modal-add:hover { opacity: 0.75; }
+.modal-add.added { opacity: 0.4; cursor: default; }
+
+/* ── NEWSLETTER ── */
+.newsletter { background: var(--black); color: var(--white); padding: 80px 40px; text-align: center; margin-top: 60px; }
+.nl-eyebrow { font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 18px; }
+.nl-title { font-family: var(--serif); font-size: 38px; font-weight: 400; line-height: 1.1; margin-bottom: 10px; }
+.nl-title em { font-style: italic; }
+.nl-sub { font-size: 11px; color: var(--gray-3); font-weight: 300; margin-bottom: 32px; }
+.nl-form { display: flex; max-width: 380px; margin: 0 auto; }
+.nl-input { flex: 1; padding: 12px 14px; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-right: none; color: var(--white); font-family: var(--sans); font-size: 11px; outline: none; }
+.nl-input::placeholder { color: rgba(255,255,255,0.3); }
+.nl-input:focus { border-color: rgba(255,255,255,0.5); }
+.nl-btn { padding: 12px 22px; background: var(--white); color: var(--black); border: none; font-family: var(--sans); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+.nl-btn:hover { opacity: 0.8; }
+.nl-success { font-family: var(--serif); font-size: 17px; font-style: italic; color: rgba(255,255,255,0.6); }
+
+/* ── FOOTER ── */
+footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid var(--gray-2); }
+.footer-logo { font-family: var(--serif); font-size: 14px; letter-spacing: 0.06em; }
+.footer-links { display: flex; gap: 28px; list-style: none; justify-content: center; }
+.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-4); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--black); }
+.footer-copy { font-size: 9px; color: var(--gray-3); text-align: right; letter-spacing: 0.05em; }
+
+/* ── CART ── */
+.cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 400; opacity: 0; pointer-events: none; transition: opacity 0.28s; }
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+.cart-drawer { position: fixed; top: 0; right: -420px; width: 420px; height: 100vh; background: var(--white); z-index: 401; display: flex; flex-direction: column; border-left: 1px solid var(--gray-2); transition: right 0.36s cubic-bezier(0.32,0,0.67,0); }
+.cart-drawer.open { right: 0; transition-timing-function: cubic-bezier(0.33,1,0.68,1); }
+.cart-head { padding: 0 28px; height: 64px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--gray-2); flex-shrink: 0; }
+.cart-title { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+.close-x { background: none; border: none; cursor: pointer; font-size: 19px; color: var(--gray-4); padding: 4px; line-height: 1; transition: color 0.2s; }
+.close-x:hover { color: var(--black); }
+.cart-body { flex: 1; overflow-y: auto; padding: 0 28px; }
+.cart-empty { padding: 70px 0; text-align: center; color: var(--gray-3); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+.ci-row { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--gray-2); align-items: flex-start; }
+.ci-thumb { width: 64px; height: 80px; flex-shrink: 0; background: var(--gray-1); overflow: hidden; }
+.ci-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.ci-info { flex: 1; }
+.ci-name { font-family: var(--serif); font-size: 13px; margin-bottom: 3px; line-height: 1.3; }
+.ci-meta { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 10px; }
+.ci-del { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-3); background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 0; font-family: var(--sans); transition: color 0.2s; }
+.ci-del:hover { color: var(--black); }
+.ci-price { font-family: var(--serif); font-size: 14px; flex-shrink: 0; }
+.cart-foot { padding: 20px 28px 36px; border-top: 1px solid var(--gray-2); flex-shrink: 0; }
+.cart-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+.ct-lbl { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-4); }
+.ct-val { font-family: var(--serif); font-size: 24px; }
+.checkout-btn { width: 100%; background: var(--black); color: var(--white); border: none; padding: 14px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+.checkout-btn:hover { opacity: 0.75; }
+
+@media (max-width: 860px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .modal {
+    grid-template-columns: 1fr;
+    max-height: 92vh;
+    overflow-y: auto;
+    display: block;
+  }
+  .modal-gallery { max-height: 72vw; min-height: 220px; }
+  .modal-body { overflow-y: visible; padding: 24px 20px 32px; }
+  nav { padding: 0 16px; }
+  .nav-logo { font-size: 22px; }
+  footer { grid-template-columns: 1fr; gap: 20px; text-align: center; padding: 28px 20px; }
+  .footer-copy { text-align: center; }
+  .footer-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+}
+
+@media (max-width: 600px) {
+  nav { flex-direction: column; align-items: center; gap: 10px; padding: 10px 16px; position: static; }
+  .nav-logo { position: static; transform: none; font-size: 20px; order: -1; }
+  .nav-left, .nav-right { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>送料無料（¥15,000以上）</span><span class="dot"> · </span>
+    <span>毎週金曜日 新入荷</span><span class="dot"> · </span>
+    <span>全品一点物</span><span class="dot"> · </span>
+    <span>原宿 · 裏原宿 · 下北沢</span><span class="dot"> · </span>
+    <span>DMで取り置き可</span><span class="dot"> · </span>
+    <span>送料無料（¥15,000以上）</span><span class="dot"> · </span>
+    <span>毎週金曜日 新入荷</span><span class="dot"> · </span>
+    <span>全品一点物</span><span class="dot"> · </span>
+    <span>原宿 · 裏原宿 · 下北沢</span><span class="dot"> · </span>
+    <span>DMで取り置き可</span><span class="dot"> · </span>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-left">
+    <a class="nav-link" href="#">Shop</a>
+    <a class="nav-link" href="#">About</a>
+  </div>
+  <a class="nav-logo" href="#">Prolific Vintage</a>
+  <div class="nav-right">
+    <a class="nav-link" href="#">Search</a>
+    <button class="cart-btn" id="cart-open-btn">
+      Bag
+      <span class="cart-count-badge" id="cart-badge" style="display:none">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Section header -->
+<div class="section-head">
+  <div class="section-title">Current Drop</div>
+  <span class="item-count">33 pieces</span>
+</div>
+
+<!-- Product Grid -->
+<div class="product-grid" id="product-grid"></div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+  <div class="nl-eyebrow">Stay Prolific</div>
+  <h2 class="nl-title">毎ドロップ、<em>最速通知。</em></h2>
+  <p class="nl-sub">スパムなし。お知らせだけ。</p>
+  <form class="nl-form" id="nl-form">
+    <input class="nl-input" type="email" placeholder="your@email.com" required/>
+    <button class="nl-btn" type="submit">登録</button>
+  </form>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Prolific Vintage</div>
+  <ul class="footer-links">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Depop</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">FAQ</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Prolific Vintage</div>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-gallery">
+      <button class="modal-close" id="modal-close">×</button>
+      <div class="modal-main-img">
+        <img id="modal-photo" src="" alt=""/>
+        <button class="gal-arrow gal-prev hidden" id="gal-prev">&#8249;</button>
+        <button class="gal-arrow gal-next hidden" id="gal-next">&#8250;</button>
+        <div class="gal-counter" id="gal-counter" style="display:none">1 / 1</div>
+      </div>
+      <div class="modal-thumbs" id="modal-thumbs"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-eyebrow" id="modal-brand"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <div class="modal-price" id="modal-price"></div>
+      <span class="modal-grade-tag" id="modal-grade"></span>
+      <hr class="modal-divider">
+      <div class="modal-label">Size</div>
+      <span class="modal-size-tag" id="modal-size"></span>
+      <hr class="modal-divider">
+      <div class="modal-label">実寸</div>
+      <div class="modal-meas" id="modal-meas"></div>
+      <hr class="modal-divider">
+      <div class="modal-label">コンディション</div>
+      <p class="modal-cond-text" id="modal-cond"></p>
+      <button class="modal-add" id="modal-add">カートに追加</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cart -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <div class="cart-title" id="cart-title">Your Bag (0)</div>
+    <button class="close-x" id="cart-close">×</button>
+  </div>
+  <div class="cart-body" id="cart-body"><div class="cart-empty">バッグは空です</div></div>
+  <div class="cart-foot" id="cart-foot" style="display:none">
+    <div class="cart-total-row">
+      <span class="ct-lbl">合計</span>
+      <span class="ct-val" id="cart-total">¥0</span>
+    </div>
+    <button class="checkout-btn">購入手続きへ</button>
+  </div>
+</div>
+
+<script>
+const PRODUCTS = [
+  { id:1,  name:"BXH Graphic Tee",           brand:"BOUNTY HUNTER",            size:"M",    price:6500,  grade:"C", img:"assets/products/p01.jpg", imgs:11, kata:"48.5cm", miba:"49.5cm", take:"60.5cm", sode:"18.5cm", cond:"首周りに極わずかな小さな欠損、後ろに極わずかな薄い色あせがございます。着用に問題はございません。" },
+  { id:2,  name:"EC Logo Tee",               brand:"LETITRIDE",                size:"OS",   price:3200,  grade:"C", img:"assets/products/p02.jpg", imgs:14, kata:"51.5cm", miba:"53.0cm", take:"69.0cm", sode:"23.5cm", cond:"数箇所に僅かな色あせがございます。着用に問題はございません。" },
+  { id:3,  name:"Raglan Tee",                brand:"APE SHALL NEVER KILL APE", size:"L",    price:4500,  grade:"C", img:"assets/products/p03.jpg", imgs:11, kata:"—",      miba:"58.0cm", take:"55.0cm", sode:"ラグラン裄丈 91cm", cond:"数箇所に薄い汚れがございます。着用に問題はございません。" },
+  { id:4,  name:"Camo Coach Jacket",         brand:"A BATHING APE",            size:"L",    price:14000, grade:"C", img:"assets/products/p04.jpg", imgs:15, kata:"—",      miba:"66.0cm", take:"75.5cm", sode:"ラグラン裄丈 約89cm", cond:"所々に色あせ、左脇に穴がございます。着用に問題はございません。" },
+  { id:5,  name:"Military Field Coat",       brand:"A BATHING APE",            size:"M",    price:18000, grade:"C", img:"assets/products/p05.jpg", imgs:13, kata:"45.0cm", miba:"55.5cm", take:"70.0cm", sode:"59.5cm", cond:"首周りと正面に極わずかな薄い汚れがございます。着用に問題はございません。" },
+  { id:6,  name:"Logo Print Tee",            brand:"FRESH SCREEN",             size:"M",    price:3500,  grade:"C", img:"assets/products/p06.jpg", imgs:9,  kata:"47.0cm", miba:"51.0cm", take:"64.5cm", sode:"22.5cm", cond:"後ろに極わずかな色あせがございます。着用に問題はございません。" },
+  { id:7,  name:"Vintage Graphic Tee",       brand:"UNKNOWN",                  size:"—",    price:2500,  grade:"C", img:"assets/products/p07.jpg", imgs:8,  kata:"49.0cm", miba:"51.0cm", take:"67.5cm", sode:"22.5cm", cond:"数箇所に極わずかな薄い色あせがございます。着用に問題はございません。" },
+  { id:8,  name:"Lightning Graphic Tee",     brand:"UNDERCOVER",               size:"M",    price:9500,  grade:"B", img:"assets/products/p08.jpg", imgs:9,  kata:"49.0cm", miba:"52.0cm", take:"61.5cm", sode:"18.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
+  { id:9,  name:"Vintage Print Tee",         brand:"Hanes",                    size:"M",    price:2200,  grade:"C", img:"assets/products/p09.jpg", imgs:9,  kata:"48.5cm", miba:"50.0cm", take:"67.5cm", sode:"18.5cm", cond:"数箇所に小さな汚れ、首周りに極わずかな穴がございます。着用に問題はございません。" },
+  { id:10, name:"Character Graphic Tee",     brand:"UNDERCOVER",               size:"M",    price:9800,  grade:"B", img:"assets/products/p10.jpg", imgs:9,  kata:"44.5cm", miba:"45.0cm", take:"61.0cm", sode:"16.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
+  { id:11, name:"Raglan Sweatshirt",         brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4800,  grade:"C", img:"assets/products/p11.jpg", imgs:10, kata:"—",      miba:"54.0cm", take:"55.0cm", sode:"ラグラン裄丈 約84.5cm", cond:"前後に極わずかな小さな汚れがございます。着用に問題はございません。" },
+  { id:12, name:"BXH Print Tee",            brand:"BOUNTY HUNTER",            size:"L",    price:6000,  grade:"C", img:"assets/products/p12.jpg", imgs:12, kata:"46.5cm", miba:"53.0cm", take:"69.0cm", sode:"23.0cm", cond:"数箇所に極わずかな薄い色あせがございます。着用に問題はございません。" },
+  { id:13, name:"Graphic Tee",              brand:"HYSTERIC GLAMOUR",         size:"FREE", price:3800,  grade:"C", img:"assets/products/p13.jpg", imgs:9,  kata:"41.0cm", miba:"44.5cm", take:"63.0cm", sode:"21.5cm", cond:"正面に極わずかな小さな色あせがございます。着用に問題はございません。" },
+  { id:14, name:"Lace Tank Top",            brand:"HYSTERIC GLAMOUR",         size:"FREE", price:5500,  grade:"B", img:"assets/products/p14.jpg", imgs:7,  kata:"29.0cm", miba:"30.0cm", take:"49.0cm", sode:"—",      cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
+  { id:15, name:"Hi! Graphic Sweatshirt",   brand:"HYSTERIC GLAMOUR",         size:"FREE", price:8500,  grade:"B", img:"assets/products/p15.jpg", imgs:7,  kata:"41.0cm", miba:"45.0cm", take:"57.0cm", sode:"61.0cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
+  { id:16, name:"Graphic Tee",             brand:"UNDERCOVER",                size:"M",    price:7500,  grade:"C", img:"assets/products/p16.jpg", imgs:10, kata:"46.5cm", miba:"49.0cm", take:"66.0cm", sode:"19.5cm", cond:"数箇所に僅かな色あせがございます。着用に問題はございません。" },
+  { id:17, name:"Raglan Pullover",          brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4200,  grade:"C", img:"assets/products/p17.jpg", imgs:10, kata:"—",      miba:"50.5cm", take:"57.0cm", sode:"ラグラン裄丈 約90.5cm", cond:"所々に小さな毛玉と正面に小さな穴がございます。着用に問題はございません。" },
+  { id:18, name:"Lace Tank Top",            brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4800,  grade:"B", img:"assets/products/p18.jpg", imgs:7,  kata:"25.0cm", miba:"31.0cm", take:"43.0cm", sode:"—",      cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
+  { id:19, name:"EC Logo Tee",             brand:"EMPIRE COMPANY INC.",       size:"L",    price:3500,  grade:"C", img:"assets/products/p19.jpg", imgs:8,  kata:"53.5cm", miba:"53.5cm", take:"70.5cm", sode:"21.0cm", cond:"数箇所に小さな汚れがございます。着用に問題はございません。" },
+  { id:20, name:"Graphic Tee",             brand:"BALANCE",                   size:"L",    price:2800,  grade:"C", img:"assets/products/p20.jpg", imgs:9,  kata:"52.0cm", miba:"54.5cm", take:"67.5cm", sode:"22.0cm", cond:"正面プリントに極わずかな色移りがございます。着用に問題はございません。" },
+  { id:21, name:"Graphic Tee",             brand:"BALANCE",                   size:"L",    price:2800,  grade:"C", img:"assets/products/p21.jpg", imgs:11, kata:"54.0cm", miba:"54.0cm", take:"68.0cm", sode:"22.5cm", cond:"数箇所に小さな汚れがございます。着用に問題はございません。" },
+  { id:22, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"M",    price:3200,  grade:"C", img:"assets/products/p22.jpg", imgs:9,  kata:"48.0cm", miba:"51.0cm", take:"63.0cm", sode:"21.0cm", cond:"数箇所に僅かな色あせ、首周りに薄い汚れがございます。着用に問題はございません。" },
+  { id:23, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"S",    price:3000,  grade:"C", img:"assets/products/p23.jpg", imgs:9,  kata:"44.5cm", miba:"47.0cm", take:"55.5cm", sode:"18.5cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" },
+  { id:24, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"L",    price:3200,  grade:"C", img:"assets/products/p24.jpg", imgs:9,  kata:"45.0cm", miba:"48.0cm", take:"68.5cm", sode:"23.0cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" },
+  { id:25, name:"Vintage Tee",             brand:"UNITED SPORTS",             size:"S",    price:2500,  grade:"C", img:"assets/products/p25.jpg", imgs:8,  kata:"44.0cm", miba:"45.5cm", take:"60.0cm", sode:"18.5cm", cond:"数箇所に薄い色あせと薄い汚れがございます。着用に問題はございません。" },
+  { id:26, name:"Print Tee",              brand:"FRUIT OF THE LOOM",          size:"M",    price:2200,  grade:"C", img:"assets/products/p26.jpg", imgs:8,  kata:"46.0cm", miba:"47.5cm", take:"67.0cm", sode:"19.0cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" },
+  { id:27, name:"Oversized Graphic Tee",  brand:"CHAOTiC DISCORE",            size:"M",    price:3500,  grade:"C", img:"assets/products/p27.jpg", imgs:11, kata:"50.0cm", miba:"59.0cm", take:"69.0cm", sode:"24.5cm", cond:"数箇所に薄い汚れがございます。着用に問題はございません。" },
+  { id:28, name:"Lace Tank Top",          brand:"HYSTERIC GLAMOUR",           size:"FREE", price:4500,  grade:"C", img:"assets/products/p28.jpg", imgs:9,  kata:"27.0cm", miba:"31.5cm", take:"43.5cm", sode:"—",      cond:"後ろに極わずかな薄い汚れがございます。着用に問題はございません。" },
+  { id:29, name:"Butterfly Graphic Tee",  brand:"HYSTERIC GLAMOUR",           size:"FREE", price:7800,  grade:"B", img:"assets/products/p29.jpg", imgs:8,  kata:"37.5cm", miba:"41.5cm", take:"59.5cm", sode:"18.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
+  { id:30, name:"Logo Pullover",          brand:"HYSTERIC GLAMOUR",           size:"FREE", price:3800,  grade:"C", img:"assets/products/p30.jpg", imgs:10, kata:"—",      miba:"50.5cm", take:"49.5cm", sode:"裄丈 約82cm", cond:"数箇所に極わずかな薄い汚れがございます。着用に問題はございません。" },
+  { id:31, name:"Raglan Tee",             brand:"HYSTERIC GLAMOUR",           size:"FREE", price:4200,  grade:"C", img:"assets/products/p31.jpg", imgs:10, kata:"—",      miba:"51.0cm", take:"55.5cm", sode:"ラグラン裄丈 約88.5cm", cond:"数箇所に薄い色あせと汚れがございます。着用に問題はございません。" },
+  { id:32, name:"Eye Mask Coach Jacket",  brand:"BAPE",                       size:"M",    price:12000, grade:"C", img:"assets/products/p32.jpg", imgs:14, kata:"49.0cm", miba:"55.5cm", take:"71.5cm", sode:"61.5cm", cond:"ジャケット、アイマスクの所々に色あせがございます。着用に問題はございません。" },
+  { id:33, name:"Graphic Tee",           brand:"UNDERCOVER",                  size:"OS",   price:7200,  grade:"C", img:"assets/products/p33.jpg", imgs:11, kata:"—",      miba:"—",      take:"—",      sode:"—",      cond:"数箇所に極わずかな薄い汚れがございます。着用に問題はございません。" },
+];
+
+let cart = [];
+let activeId = null;
+
+const fmt = n => '¥' + n.toLocaleString('ja-JP');
+
+function renderGrid() {
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = PRODUCTS.map(p => `
+    <div class="product-card" data-id="${p.id}" tabindex="0" role="button" aria-label="${p.name}">
+      <div class="product-img">
+        <span class="grade-badge${p.grade === 'B' ? ' grade-B' : ''}">Grade ${p.grade}</span>
+        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        <div class="product-hover">
+          <button class="hover-cta" tabindex="-1">詳細を見る</button>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-footer">
+          <span class="product-size">${p.size}</span>
+          <span class="product-price">${fmt(p.price)}</span>
+        </div>
+      </div>
+    </div>`).join('');
+
+  grid.querySelectorAll('.product-card').forEach(el => {
+    el.addEventListener('click', () => openModal(parseInt(el.dataset.id)));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(parseInt(el.dataset.id)); });
+  });
+}
+
+let galImages = [];
+let galIndex = 0;
+
+function setGalImage(idx) {
+  galIndex = idx;
+  const photo = document.getElementById('modal-photo');
+  photo.style.opacity = '0';
+  setTimeout(() => {
+    photo.src = galImages[idx];
+    photo.style.opacity = '1';
+  }, 120);
+  document.querySelectorAll('.modal-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+  const counter = document.getElementById('gal-counter');
+  const prev = document.getElementById('gal-prev');
+  const next = document.getElementById('gal-next');
+  if (galImages.length > 1) {
+    counter.style.display = 'block';
+    counter.textContent = `${idx + 1} / ${galImages.length}`;
+    prev.classList.toggle('hidden', idx === 0);
+    next.classList.toggle('hidden', idx === galImages.length - 1);
+  } else {
+    counter.style.display = 'none';
+    prev.classList.add('hidden');
+    next.classList.add('hidden');
+  }
+}
+
+function openModal(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  activeId = id;
+
+  const pad = String(p.id).padStart(2, '0');
+  galImages = [p.img];
+  for (let n = 1; n <= (p.imgs || 0); n++) {
+    galImages.push(`assets/products/p${pad}_${n}.jpg`);
+  }
+
+  const thumbsEl = document.getElementById('modal-thumbs');
+  thumbsEl.innerHTML = galImages.map((src, i) =>
+    `<div class="modal-thumb${i === 0 ? ' active' : ''}" data-idx="${i}"><img src="${src}" alt=""/></div>`
+  ).join('');
+  thumbsEl.querySelectorAll('.modal-thumb').forEach(t => {
+    t.addEventListener('click', () => setGalImage(parseInt(t.dataset.idx)));
+  });
+
+  document.getElementById('modal-photo').style.opacity = '1';
+  document.getElementById('modal-photo').src = galImages[0];
+  document.getElementById('modal-photo').alt = p.name;
+  galIndex = 0;
+
+  const counter = document.getElementById('gal-counter');
+  const prev = document.getElementById('gal-prev');
+  const next = document.getElementById('gal-next');
+  if (galImages.length > 1) {
+    counter.style.display = 'block';
+    counter.textContent = `1 / ${galImages.length}`;
+    prev.classList.add('hidden');
+    next.classList.remove('hidden');
+  } else {
+    counter.style.display = 'none';
+    prev.classList.add('hidden');
+    next.classList.add('hidden');
+  }
+
+  document.getElementById('modal-brand').textContent = p.brand;
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-price').textContent = fmt(p.price);
+
+  const g = document.getElementById('modal-grade');
+  g.textContent = `Grade ${p.grade}`;
+  g.className = 'modal-grade-tag' + (p.grade === 'B' ? ' b' : '');
+
+  document.getElementById('modal-size').textContent = p.size;
+  document.getElementById('modal-cond').textContent = p.cond || '';
+
+  const pairs = [['肩幅', p.kata], ['身幅', p.miba], ['着丈', p.take], ['袖丈', p.sode]];
+  document.getElementById('modal-meas').innerHTML = pairs
+    .filter(([, v]) => v && v !== '—')
+    .map(([l, v]) => `<div class="meas-row"><span class="meas-l">${l}</span><span class="meas-v">${v}</span></div>`)
+    .join('');
+
+  const btn = document.getElementById('modal-add');
+  const inCart = cart.some(i => i.id === id);
+  btn.textContent = inCart ? 'カート済み' : 'カートに追加';
+  btn.classList.toggle('added', inCart);
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  activeId = null;
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'ArrowLeft' && galIndex > 0) setGalImage(galIndex - 1);
+  if (e.key === 'ArrowRight' && galIndex < galImages.length - 1) setGalImage(galIndex + 1);
+});
+document.getElementById('gal-prev').addEventListener('click', () => { if (galIndex > 0) setGalImage(galIndex - 1); });
+document.getElementById('gal-next').addEventListener('click', () => { if (galIndex < galImages.length - 1) setGalImage(galIndex + 1); });
+
+document.getElementById('modal-add').addEventListener('click', () => {
+  if (!activeId || cart.some(i => i.id === activeId)) return;
+  cart.push(PRODUCTS.find(p => p.id === activeId));
+  updateCart();
+  document.getElementById('modal-add').textContent = 'カート済み';
+  document.getElementById('modal-add').classList.add('added');
+  closeModal();
+  openCart();
+});
+
+function openCart() {
+  document.getElementById('cart-overlay').classList.add('open');
+  document.getElementById('cart-drawer').classList.add('open');
+}
+function closeCart() {
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.getElementById('cart-drawer').classList.remove('open');
+}
+
+function updateCart() {
+  const badge = document.getElementById('cart-badge');
+  badge.textContent = cart.length;
+  badge.style.display = cart.length ? 'flex' : 'none';
+  document.getElementById('cart-title').textContent = `Your Bag (${cart.length})`;
+
+  const body = document.getElementById('cart-body');
+  const foot = document.getElementById('cart-foot');
+
+  if (!cart.length) {
+    body.innerHTML = '<div class="cart-empty">バッグは空です</div>';
+    foot.style.display = 'none';
+    return;
+  }
+
+  body.innerHTML = cart.map(item => `
+    <div class="ci-row">
+      <div class="ci-thumb"><img src="${item.img}" alt="${item.name}"></div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-meta">${item.brand} · ${item.size}</div>
+        <button class="ci-del" data-id="${item.id}">削除</button>
+      </div>
+      <div class="ci-price">${fmt(item.price)}</div>
+    </div>`).join('');
+
+  body.querySelectorAll('.ci-del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      cart = cart.filter(i => i.id !== parseInt(btn.dataset.id));
+      updateCart();
+    });
+  });
+
+  document.getElementById('cart-total').textContent = fmt(cart.reduce((s, i) => s + i.price, 0));
+  foot.style.display = 'block';
+}
+
+document.getElementById('cart-open-btn').addEventListener('click', openCart);
+document.getElementById('cart-close').addEventListener('click', closeCart);
+document.getElementById('cart-overlay').addEventListener('click', closeCart);
+
+document.getElementById('nl-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const msg = document.createElement('p');
+  msg.className = 'nl-success';
+  msg.textContent = '登録しました。';
+  e.target.replaceWith(msg);
+});
+
+renderGrid();
+</script>
+</body>
+</html>
