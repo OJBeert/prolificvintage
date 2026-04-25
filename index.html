@@ -31,17 +31,17 @@ body { background: var(--white); color: var(--black); font-family: var(--sans); 
 /* ── NAV ── */
 nav {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; height: 64px;
+  padding: 16px 40px;
   border-bottom: 1px solid var(--gray-2);
   position: sticky; top: 0;
   background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); z-index: 200;
 }
-.nav-left, .nav-right { display: flex; gap: 32px; align-items: center; }
+.nav-right { display: flex; gap: 32px; align-items: center; }
 .nav-link { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; color: var(--black); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; }
 .nav-link:hover { opacity: 1; }
-.nav-logo { display: flex; flex-direction: column; align-items: flex-start; color: var(--black); position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; text-decoration: none; line-height: 1; }
-.logo-main { font-family: 'Bebas Neue', Impact, Arial Black, sans-serif; font-size: 38px; letter-spacing: 0.01em; line-height: 1; }
-.logo-sub { font-family: var(--sans); font-size: 9px; letter-spacing: 0.55em; text-transform: uppercase; font-weight: 400; margin-top: 1px; }
+.nav-logo { display: flex; flex-direction: column; align-items: flex-start; color: var(--black); text-decoration: none; }
+.logo-main { font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif; font-size: 64px; letter-spacing: 0.015em; line-height: 0.9; display: inline-block; border-bottom: 2.5px solid var(--black); padding-bottom: 5px; margin-bottom: 5px; }
+.logo-sub { font-family: var(--sans); font-size: 10px; letter-spacing: 0.62em; text-transform: uppercase; font-weight: 400; }
 .cart-btn { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; background: none; border: none; cursor: pointer; color: var(--black); display: flex; align-items: center; gap: 8px; opacity: 0.55; transition: opacity 0.2s; font-family: var(--sans); }
 .cart-btn:hover { opacity: 1; }
 .cart-count-badge { width: 15px; height: 15px; background: var(--black); color: var(--white); font-size: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -224,8 +224,8 @@ nav {
 /* ── FOOTER ── */
 footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid var(--gray-2); }
 .footer-logo { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
-.footer-logo-main { font-family: 'Bebas Neue', Impact, Arial Black, sans-serif; font-size: 22px; letter-spacing: 0.01em; }
-.footer-logo-sub { font-family: var(--sans); font-size: 7px; letter-spacing: 0.5em; text-transform: uppercase; margin-top: 1px; }
+.footer-logo-main { font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif; font-size: 26px; letter-spacing: 0.015em; display: inline-block; border-bottom: 1.5px solid var(--black); padding-bottom: 3px; margin-bottom: 3px; }
+.footer-logo-sub { font-family: var(--sans); font-size: 7.5px; letter-spacing: 0.62em; text-transform: uppercase; }
 .footer-links { display: flex; gap: 28px; list-style: none; justify-content: center; }
 .footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-4); text-decoration: none; transition: color 0.2s; }
 .footer-links a:hover { color: var(--black); }
@@ -268,17 +268,17 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   }
   .modal-gallery { max-height: 72vw; min-height: 220px; }
   .modal-body { overflow-y: visible; padding: 24px 20px 32px; }
-  nav { padding: 0 16px; }
-  .nav-logo { font-size: 22px; }
+  nav { padding: 12px 16px; }
+  .logo-main { font-size: 46px; }
   footer { grid-template-columns: 1fr; gap: 20px; text-align: center; padding: 28px 20px; }
   .footer-copy { text-align: center; }
   .footer-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
 }
 
 @media (max-width: 600px) {
-  nav { flex-direction: column; align-items: center; gap: 10px; padding: 10px 16px; position: static; }
-  .nav-logo { position: static; transform: none; font-size: 20px; order: -1; }
-  .nav-left, .nav-right { gap: 20px; }
+  nav { padding: 10px 16px; }
+  .logo-main { font-size: 38px; }
+  .nav-right { gap: 16px; }
 }
 </style>
 </head>
@@ -302,10 +302,6 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 
 <!-- Nav -->
 <nav>
-  <div class="nav-left">
-    <a class="nav-link" href="#">Shop</a>
-    <a class="nav-link" href="#">About</a>
-  </div>
   <a class="nav-logo" href="#">
     <span class="logo-main">PRO-LIFIC</span>
     <span class="logo-sub">VINTAGE</span>
