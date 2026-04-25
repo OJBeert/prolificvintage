@@ -342,12 +342,14 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm{margin:0;padding:0 0 20px 0;width:100%;height:auto;float:left;}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow{margin:0 0 10px 0;width:100%;}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item{margin:0;}
-#mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input{background-color:#ffffff!important;color:#333333!important;border-color:#cccccc;border-radius:4px!important;border-style:solid!important;border-width:1px!important;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:14px!important;height:auto;line-height:21px!important;margin:0;padding:10px 10px!important;width:100%!important;box-sizing:border-box!important;max-width:100%!important;}
+#mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input{background-color:#000000!important;color:#ffffff!important;border-color:#333333;border-radius:4px!important;border-style:solid!important;border-width:1px!important;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:14px!important;height:auto;line-height:21px!important;margin:0;padding:10px 10px!important;width:100%!important;box-sizing:border-box!important;max-width:100%!important;}
+#mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input::placeholder{color:rgba(255,255,255,0.4);}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow{height:auto;width:100%;float:left;}
-.ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal{width:70%;float:left;}
-.ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal{width:30%;float:left;}
-.ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields{box-sizing:border-box;float:left;padding-right:10px;}
-#mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input{background-color:#ffffff;color:#333333;border-color:#cccccc;border-radius:4px;border-style:solid;border-width:1px;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;margin:0;padding:10px 10px;width:100%;box-sizing:border-box;}
+.ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal{width:68%;float:left;}
+.ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal{width:32%;float:left;}
+.ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields{box-sizing:border-box;float:left;padding-right:8px;}
+#mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input{background-color:#000000;color:#ffffff;border-color:#333333;border-radius:4px;border-style:solid;border-width:1px;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;margin:0;padding:10px 10px;width:100%;box-sizing:border-box;}
+#mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input::placeholder{color:rgba(255,255,255,0.4);}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button{background-color:#ffffff!important;border-color:#ffffff;border-style:solid;border-width:1px;border-radius:4px;box-shadow:none;color:#000000!important;cursor:pointer;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:11px!important;font-weight:700;letter-spacing:0.1em;line-height:20px;margin:0!important;padding:10px!important;width:100%;height:auto;}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover{background-color:#e0e0e0!important;border-color:#e0e0e0!important;}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit{margin:0 0 20px 0;float:left;width:100%;}
@@ -356,18 +358,15 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button:hover{background-color:#e0e0e0!important;}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent h4{color:#ffffff!important;}
 #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent p{color:rgba(255,255,255,0.7)!important;}
-.ml-mobileButton-horizontal{display:none;}
-#mlb2-40421023 .ml-mobileButton-horizontal button{background-color:#ffffff!important;border-color:#ffffff!important;border-style:solid!important;border-width:1px!important;border-radius:4px!important;box-shadow:none!important;color:#000000!important;cursor:pointer;font-family:'Open Sans',Arial,Helvetica,sans-serif!important;font-size:11px!important;font-weight:700!important;letter-spacing:0.1em;line-height:20px!important;padding:10px!important;width:100%!important;}
+.ml-mobileButton-horizontal{display:none!important;}
 .ml-error input,.ml-error textarea,.ml-error select{border-color:red!important;}
 @media only screen and (max-width:400px){
   .ml-form-embedWrapper.embedDefault,.ml-form-embedWrapper.embedPopup{width:100%!important;}
   .ml-form-formContent.horozintalForm{float:left!important;}
   .ml-form-formContent.horozintalForm .ml-form-horizontalRow{height:auto!important;width:100%!important;float:left!important;}
-  .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal{width:100%!important;}
-  .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal>div{padding-right:0!important;padding-bottom:10px;}
-  .ml-form-formContent.horozintalForm .ml-button-horizontal{display:none!important;}
-  .ml-mobileButton-horizontal{display:inline-block!important;margin-bottom:20px;width:100%;}
-  .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields{margin-bottom:10px!important;width:100%!important;}
+  .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal{width:65%!important;}
+  .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal{width:35%!important;display:block!important;}
+  .ml-mobileButton-horizontal{display:none!important;}
   #mlb2-40421023.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent.horozintalForm{padding:0 0 10px 0!important;}
 }
 </style>
