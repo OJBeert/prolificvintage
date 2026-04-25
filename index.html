@@ -51,6 +51,14 @@ nav {
 }
 .search-input::placeholder { color: var(--gray-3); }
 .search-close { background: none; border: none; cursor: pointer; font-size: 22px; color: var(--gray-4); line-height: 1; padding: 0 4px; }
+/* ── LANG TOGGLE ── */
+.lang-btn {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 400; background: none; border: 1px solid var(--black);
+  cursor: pointer; color: var(--black); padding: 3px 8px; font-family: var(--sans);
+  opacity: 0.55; transition: opacity 0.2s;
+}
+.lang-btn:hover { opacity: 1; }
 .no-results { padding: 60px; text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-3); display: none; }
 .nav-link { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; color: var(--black); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; }
 .nav-link:hover { opacity: 1; }
@@ -295,7 +303,8 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
     overflow-y: auto;
     display: block;
   }
-  .modal-gallery { max-height: 72vw; min-height: 220px; }
+  .modal-gallery { max-height: none; min-height: auto; }
+  .modal-main-img { aspect-ratio: 1 / 1; flex: none; }
   .modal-body { overflow-y: visible; padding: 24px 20px 32px; }
   nav { padding: 12px 16px; }
   .logo-main { font-size: 46px; }
@@ -316,16 +325,16 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 <!-- Ticker -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span>送料無料（¥15,000以上）</span><span class="dot"> · </span>
-    <span>毎週金曜日 新入荷</span><span class="dot"> · </span>
-    <span>全品一点物</span><span class="dot"> · </span>
-    <span>原宿 · 裏原宿 · 下北沢</span><span class="dot"> · </span>
-    <span>DMで取り置き可</span><span class="dot"> · </span>
-    <span>送料無料（¥15,000以上）</span><span class="dot"> · </span>
-    <span>毎週金曜日 新入荷</span><span class="dot"> · </span>
-    <span>全品一点物</span><span class="dot"> · </span>
-    <span>原宿 · 裏原宿 · 下北沢</span><span class="dot"> · </span>
-    <span>DMで取り置き可</span><span class="dot"> · </span>
+    <span data-i18n="ticker.shipping">送料無料（¥15,000以上）</span><span class="dot"> · </span>
+    <span data-i18n="ticker.arrivals">毎週金曜日 新入荷</span><span class="dot"> · </span>
+    <span data-i18n="ticker.oneofakind">全品一点物</span><span class="dot"> · </span>
+    <span data-i18n="ticker.location">原宿 · 裏原宿 · 下北沢</span><span class="dot"> · </span>
+    <span data-i18n="ticker.reserve">DMで取り置き可</span><span class="dot"> · </span>
+    <span data-i18n="ticker.shipping">送料無料（¥15,000以上）</span><span class="dot"> · </span>
+    <span data-i18n="ticker.arrivals">毎週金曜日 新入荷</span><span class="dot"> · </span>
+    <span data-i18n="ticker.oneofakind">全品一点物</span><span class="dot"> · </span>
+    <span data-i18n="ticker.location">原宿 · 裏原宿 · 下北沢</span><span class="dot"> · </span>
+    <span data-i18n="ticker.reserve">DMで取り置き可</span><span class="dot"> · </span>
   </div>
 </div>
 
@@ -336,6 +345,7 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
     <span class="logo-sub">VINTAGE</span>
   </a>
   <div class="nav-right">
+    <button class="lang-btn" id="lang-btn">EN</button>
     <a class="nav-link" href="#" id="search-btn">Search</a>
     <button class="cart-btn" id="cart-open-btn">
       Bag
@@ -346,7 +356,7 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 
 <!-- Search bar -->
 <div class="search-bar" id="search-bar">
-  <input class="search-input" id="search-input" type="text" placeholder="ブランド・商品名で検索..."/>
+  <input class="search-input" id="search-input" type="text" data-i18n-placeholder="search.placeholder" placeholder="ブランド・商品名で検索..."/>
   <button class="search-close" id="search-close">×</button>
 </div>
 
@@ -358,16 +368,16 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 
 <!-- Product Grid -->
 <div class="product-grid" id="product-grid"></div>
-<div class="no-results" id="no-results">該当する商品が見つかりません</div>
+<div class="no-results" id="no-results" data-i18n="search.noresults">該当する商品が見つかりません</div>
 
 <!-- Newsletter -->
 <div class="newsletter">
   <div class="nl-eyebrow">Stay Prolific</div>
-  <h2 class="nl-title">毎ドロップ、<em>最速通知。</em></h2>
-  <p class="nl-sub">スパムなし。お知らせだけ。</p>
+  <h2 class="nl-title"><span data-i18n="nl.title1">毎ドロップ、</span><em data-i18n="nl.title2">最速通知。</em></h2>
+  <p class="nl-sub" data-i18n="nl.sub">スパムなし。お知らせだけ。</p>
   <form class="nl-form" id="nl-form">
     <input class="nl-input" type="email" placeholder="your@email.com" required/>
-    <button class="nl-btn" type="submit">登録</button>
+    <button class="nl-btn" type="submit" data-i18n="nl.btn">登録</button>
   </form>
 </div>
 
@@ -405,13 +415,13 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
       <div class="modal-price" id="modal-price"></div>
       <span class="modal-grade-tag" id="modal-grade"></span>
       <hr class="modal-divider">
-      <div class="modal-label">Size</div>
+      <div class="modal-label" data-i18n="modal.size">Size</div>
       <span class="modal-size-tag" id="modal-size"></span>
       <hr class="modal-divider">
-      <div class="modal-label">実寸</div>
+      <div class="modal-label" data-i18n="modal.meas">実寸</div>
       <div class="modal-meas" id="modal-meas"></div>
       <hr class="modal-divider">
-      <div class="modal-label">コンディション</div>
+      <div class="modal-label" data-i18n="modal.cond">コンディション</div>
       <p class="modal-cond-text" id="modal-cond"></p>
       <button class="modal-add" id="modal-add">カートに追加</button>
     </div>
@@ -425,13 +435,13 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
     <div class="cart-title" id="cart-title">Your Bag (0)</div>
     <button class="close-x" id="cart-close">×</button>
   </div>
-  <div class="cart-body" id="cart-body"><div class="cart-empty">バッグは空です</div></div>
+  <div class="cart-body" id="cart-body"><div class="cart-empty" data-i18n="cart.empty">バッグは空です</div></div>
   <div class="cart-foot" id="cart-foot" style="display:none">
     <div class="cart-total-row">
-      <span class="ct-lbl">合計</span>
+      <span class="ct-lbl" data-i18n="cart.total">合計</span>
       <span class="ct-val" id="cart-total">¥0</span>
     </div>
-    <button class="checkout-btn">購入手続きへ</button>
+    <button class="checkout-btn" data-i18n="cart.checkout">購入手続きへ</button>
   </div>
 </div>
 
@@ -635,7 +645,7 @@ function updateCart() {
   const foot = document.getElementById('cart-foot');
 
   if (!cart.length) {
-    body.innerHTML = '<div class="cart-empty">バッグは空です</div>';
+    body.innerHTML = '<div class="cart-empty" data-i18n="cart.empty">バッグは空です</div>';
     foot.style.display = 'none';
     return;
   }
@@ -713,6 +723,62 @@ fetch('sold_out.json').then(r => r.json()).then(ids => {
     if (p) p.soldOut = true;
   });
 }).catch(() => {}).finally(() => renderGrid());
+
+// ── LANGUAGE TOGGLE ──────────────────────────────────────────────────────────
+const LANG = {
+  jp: {
+    'ticker.shipping':   '送料無料（¥15,000以上）',
+    'ticker.arrivals':   '毎週金曜日 新入荷',
+    'ticker.oneofakind': '全品一点物',
+    'ticker.location':   '原宿 · 裏原宿 · 下北沢',
+    'ticker.reserve':    'DMで取り置き可',
+    'modal.size':  'Size', 'modal.meas': '実寸', 'modal.cond': 'コンディション',
+    'cart.empty':  'バッグは空です', 'cart.total': '合計',
+    'cart.checkout': '購入手続きへ',
+    'nl.title1': '毎ドロップ、', 'nl.title2': '最速通知。',
+    'nl.sub': 'スパムなし。お知らせだけ。', 'nl.btn': '登録',
+    'search.placeholder': 'ブランド・商品名で検索...',
+    'search.noresults': '該当する商品が見つかりません',
+  },
+  en: {
+    'ticker.shipping':   'Free shipping (over ¥15,000)',
+    'ticker.arrivals':   'New arrivals every Friday',
+    'ticker.oneofakind': 'All one-of-a-kind',
+    'ticker.location':   'Harajuku · Ura-Harajuku · Shimokitazawa',
+    'ticker.reserve':    'Reservations via DM',
+    'modal.size':  'Size', 'modal.meas': 'Measurements', 'modal.cond': 'Condition',
+    'cart.empty':  'Your bag is empty', 'cart.total': 'Total',
+    'cart.checkout': 'Checkout',
+    'nl.title1': 'First to know ', 'nl.title2': 'every drop.',
+    'nl.sub': 'No spam. Just drops.', 'nl.btn': 'Subscribe',
+    'search.placeholder': 'Search brand or product...',
+    'search.noresults': 'No products found',
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'jp';
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.getElementById('lang-btn').textContent = lang === 'jp' ? 'EN' : 'JP';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (LANG[lang][key]) el.textContent = LANG[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (LANG[lang][key]) el.placeholder = LANG[lang][key];
+  });
+}
+
+document.getElementById('lang-btn').addEventListener('click', () => {
+  applyLang(currentLang === 'jp' ? 'en' : 'jp');
+});
+
+// Apply saved language on load
+applyLang(currentLang);
+
 </script>
 </body>
 </html>
