@@ -106,6 +106,18 @@ nav {
 .product-fullname { font-size: 11px; letter-spacing: 0.03em; text-transform: uppercase; font-weight: 400; line-height: 1.4; margin-bottom: 5px; font-family: var(--sans); }
 .product-price { font-family: var(--sans); font-size: 12px; font-weight: 400; color: var(--black); letter-spacing: 0.03em; }
 
+
+/* ── SOLD OUT ── */
+.sold-badge {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 4px 10px; font-family: var(--sans);
+  background: rgba(12,12,12,0.88); color: #fff;
+}
+.product-card.sold-out .product-img img { opacity: 0.45; }
+.product-card.sold-out .hover-cta { display: none; }
+.modal-add.sold { background: var(--gray-2); color: var(--gray-3); cursor: not-allowed; }
+
 /* ── MODAL ── */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.5);
@@ -401,39 +413,39 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 
 <script>
 const PRODUCTS = [
-  { id:1,  name:"BXH Graphic Tee",           brand:"BOUNTY HUNTER",            size:"M",    price:6500,  grade:"C", img:"assets/products/p01.jpg", imgs:11, kata:"48.5cm", miba:"49.5cm", take:"60.5cm", sode:"18.5cm", cond:"首周りに極わずかな小さな欠損、後ろに極わずかな薄い色あせがございます。着用に問題はございません。" },
-  { id:2,  name:"EC Logo Tee",               brand:"LETITRIDE",                size:"OS",   price:3200,  grade:"C", img:"assets/products/p02.jpg", imgs:14, kata:"51.5cm", miba:"53.0cm", take:"69.0cm", sode:"23.5cm", cond:"数箇所に僅かな色あせがございます。着用に問題はございません。" },
-  { id:3,  name:"Raglan Tee",                brand:"APE SHALL NEVER KILL APE", size:"L",    price:4500,  grade:"C", img:"assets/products/p03.jpg", imgs:11, kata:"—",      miba:"58.0cm", take:"55.0cm", sode:"ラグラン裄丈 91cm", cond:"数箇所に薄い汚れがございます。着用に問題はございません。" },
-  { id:4,  name:"DIGITAL CAMO RAIN JACKET",   brand:"A BATHING APE",            size:"L",    price:45000, grade:"C", img:"assets/products/p04.jpg", imgs:15, kata:"—",      miba:"66.0cm", take:"75.5cm", sode:"ラグラン裄丈 約89cm", cond:"所々に色あせ、左脇に穴がございます。着用に問題はございません。" },
-  { id:5,  name:"DIGITAL CAMO SHIRT JACKET",  brand:"A BATHING APE",            size:"M",    price:30000, grade:"C", img:"assets/products/p05.jpg", imgs:13, kata:"45.0cm", miba:"55.5cm", take:"70.0cm", sode:"59.5cm", cond:"首周りと正面に極わずかな薄い汚れがございます。着用に問題はございません。" },
-  { id:6,  name:"Logo Print Tee",            brand:"FRESH SCREEN",             size:"M",    price:3500,  grade:"C", img:"assets/products/p06.jpg", imgs:9,  kata:"47.0cm", miba:"51.0cm", take:"64.5cm", sode:"22.5cm", cond:"後ろに極わずかな色あせがございます。着用に問題はございません。" },
-  { id:7,  name:"Vintage Graphic Tee",       brand:"UNKNOWN",                  size:"—",    price:2500,  grade:"C", img:"assets/products/p07.jpg", imgs:8,  kata:"49.0cm", miba:"51.0cm", take:"67.5cm", sode:"22.5cm", cond:"数箇所に極わずかな薄い色あせがございます。着用に問題はございません。" },
-  { id:8,  name:"Lightning Graphic Tee",     brand:"UNDERCOVER",               size:"M",    price:9500,  grade:"B", img:"assets/products/p08.jpg", imgs:9,  kata:"49.0cm", miba:"52.0cm", take:"61.5cm", sode:"18.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
-  { id:9,  name:"Vintage Print Tee",         brand:"Hanes",                    size:"M",    price:2200,  grade:"C", img:"assets/products/p09.jpg", imgs:9,  kata:"48.5cm", miba:"50.0cm", take:"67.5cm", sode:"18.5cm", cond:"数箇所に小さな汚れ、首周りに極わずかな穴がございます。着用に問題はございません。" },
-  { id:10, name:"Character Graphic Tee",     brand:"UNDERCOVER",               size:"M",    price:9800,  grade:"B", img:"assets/products/p10.jpg", imgs:9,  kata:"44.5cm", miba:"45.0cm", take:"61.0cm", sode:"16.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
-  { id:11, name:"ALOHA GIRL SWEAT",           brand:"HYSTERIC GLAMOUR",         size:"FREE", price:23000, grade:"C", img:"assets/products/p11.jpg", imgs:10, kata:"—",      miba:"54.0cm", take:"55.0cm", sode:"ラグラン裄丈 約84.5cm", cond:"前後に極わずかな小さな汚れがございます。着用に問題はございません。" },
-  { id:12, name:"BXH Print Tee",            brand:"BOUNTY HUNTER",            size:"L",    price:6000,  grade:"C", img:"assets/products/p12.jpg", imgs:12, kata:"46.5cm", miba:"53.0cm", take:"69.0cm", sode:"23.0cm", cond:"数箇所に極わずかな薄い色あせがございます。着用に問題はございません。" },
-  { id:13, name:"Graphic Tee",              brand:"HYSTERIC GLAMOUR",         size:"FREE", price:3800,  grade:"C", img:"assets/products/p13.jpg", imgs:9,  kata:"41.0cm", miba:"44.5cm", take:"63.0cm", sode:"21.5cm", cond:"正面に極わずかな小さな色あせがございます。着用に問題はございません。" },
-  { id:14, name:"CAMISOLE",                  brand:"HYSTERIC GLAMOUR",         size:"FREE", price:14000, grade:"B", img:"assets/products/p14.jpg", imgs:7,  kata:"29.0cm", miba:"30.0cm", take:"49.0cm", sode:"—",      cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
-  { id:15, name:"HGC SWEATSHIRT",            brand:"HYSTERIC GLAMOUR",         size:"FREE", price:24000, grade:"B", img:"assets/products/p15.jpg", imgs:7,  kata:"41.0cm", miba:"45.0cm", take:"57.0cm", sode:"61.0cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
-  { id:16, name:"Graphic Tee",             brand:"UNDERCOVER",                size:"M",    price:7500,  grade:"C", img:"assets/products/p16.jpg", imgs:10, kata:"46.5cm", miba:"49.0cm", take:"66.0cm", sode:"19.5cm", cond:"数箇所に僅かな色あせがございます。着用に問題はございません。" },
-  { id:17, name:"Raglan Pullover",          brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4200,  grade:"C", img:"assets/products/p17.jpg", imgs:10, kata:"—",      miba:"50.5cm", take:"57.0cm", sode:"ラグラン裄丈 約90.5cm", cond:"所々に小さな毛玉と正面に小さな穴がございます。着用に問題はございません。" },
-  { id:18, name:"Lace Tank Top",            brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4800,  grade:"B", img:"assets/products/p18.jpg", imgs:7,  kata:"25.0cm", miba:"31.0cm", take:"43.0cm", sode:"—",      cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
-  { id:19, name:"EC Logo Tee",             brand:"EMPIRE COMPANY INC.",       size:"L",    price:3500,  grade:"C", img:"assets/products/p19.jpg", imgs:8,  kata:"53.5cm", miba:"53.5cm", take:"70.5cm", sode:"21.0cm", cond:"数箇所に小さな汚れがございます。着用に問題はございません。" },
-  { id:20, name:"Graphic Tee",             brand:"BALANCE",                   size:"L",    price:2800,  grade:"C", img:"assets/products/p20.jpg", imgs:9,  kata:"52.0cm", miba:"54.5cm", take:"67.5cm", sode:"22.0cm", cond:"正面プリントに極わずかな色移りがございます。着用に問題はございません。" },
-  { id:21, name:"Graphic Tee",             brand:"BALANCE",                   size:"L",    price:2800,  grade:"C", img:"assets/products/p21.jpg", imgs:11, kata:"54.0cm", miba:"54.0cm", take:"68.0cm", sode:"22.5cm", cond:"数箇所に小さな汚れがございます。着用に問題はございません。" },
-  { id:22, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"M",    price:3200,  grade:"C", img:"assets/products/p22.jpg", imgs:9,  kata:"48.0cm", miba:"51.0cm", take:"63.0cm", sode:"21.0cm", cond:"数箇所に僅かな色あせ、首周りに薄い汚れがございます。着用に問題はございません。" },
-  { id:23, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"S",    price:3000,  grade:"C", img:"assets/products/p23.jpg", imgs:9,  kata:"44.5cm", miba:"47.0cm", take:"55.5cm", sode:"18.5cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" },
-  { id:24, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"L",    price:3200,  grade:"C", img:"assets/products/p24.jpg", imgs:9,  kata:"45.0cm", miba:"48.0cm", take:"68.5cm", sode:"23.0cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" },
-  { id:25, name:"Vintage Tee",             brand:"UNITED SPORTS",             size:"S",    price:2500,  grade:"C", img:"assets/products/p25.jpg", imgs:8,  kata:"44.0cm", miba:"45.5cm", take:"60.0cm", sode:"18.5cm", cond:"数箇所に薄い色あせと薄い汚れがございます。着用に問題はございません。" },
-  { id:26, name:"Print Tee",              brand:"FRUIT OF THE LOOM",          size:"M",    price:2200,  grade:"C", img:"assets/products/p26.jpg", imgs:8,  kata:"46.0cm", miba:"47.5cm", take:"67.0cm", sode:"19.0cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" },
-  { id:27, name:"Oversized Graphic Tee",  brand:"CHAOTiC DISCORE",            size:"M",    price:3500,  grade:"C", img:"assets/products/p27.jpg", imgs:11, kata:"50.0cm", miba:"59.0cm", take:"69.0cm", sode:"24.5cm", cond:"数箇所に薄い汚れがございます。着用に問題はございません。" },
-  { id:28, name:"Lace Tank Top",          brand:"HYSTERIC GLAMOUR",           size:"FREE", price:4500,  grade:"C", img:"assets/products/p28.jpg", imgs:9,  kata:"27.0cm", miba:"31.5cm", take:"43.5cm", sode:"—",      cond:"後ろに極わずかな薄い汚れがございます。着用に問題はございません。" },
-  { id:29, name:"BUTTERFLY GIRL T-SHIRT",brand:"HYSTERIC GLAMOUR",           size:"FREE", price:20000, grade:"B", img:"assets/products/p29.jpg", imgs:8,  kata:"37.5cm", miba:"41.5cm", take:"59.5cm", sode:"18.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" },
-  { id:30, name:"Logo Pullover",          brand:"HYSTERIC GLAMOUR",           size:"FREE", price:3800,  grade:"C", img:"assets/products/p30.jpg", imgs:10, kata:"—",      miba:"50.5cm", take:"49.5cm", sode:"裄丈 約82cm", cond:"数箇所に極わずかな薄い汚れがございます。着用に問題はございません。" },
-  { id:31, name:"Raglan Tee",             brand:"HYSTERIC GLAMOUR",           size:"FREE", price:4200,  grade:"C", img:"assets/products/p31.jpg", imgs:10, kata:"—",      miba:"51.0cm", take:"55.5cm", sode:"ラグラン裄丈 約88.5cm", cond:"数箇所に薄い色あせと汚れがございます。着用に問題はございません。" },
-  { id:32, name:"JONIO JACKET",            brand:"A BATHING APE",              size:"M",    price:42000, grade:"C", img:"assets/products/p32.jpg", imgs:14, kata:"49.0cm", miba:"55.5cm", take:"71.5cm", sode:"61.5cm", cond:"ジャケット、アイマスクの所々に色あせがございます。着用に問題はございません。" },
-  { id:33, name:"Graphic Tee",           brand:"UNDERCOVER",                  size:"OS",   price:7200,  grade:"C", img:"assets/products/p33.jpg", imgs:11, kata:"—",      miba:"—",      take:"—",      sode:"—",      cond:"数箇所に極わずかな薄い汚れがございます。着用に問題はございません。" },
+  { id:1,  name:"BXH Graphic Tee",           brand:"BOUNTY HUNTER",            size:"M",    price:6500,  grade:"C", img:"assets/products/p01.jpg", imgs:11, kata:"48.5cm", miba:"49.5cm", take:"60.5cm", sode:"18.5cm", cond:"首周りに極わずかな小さな欠損、後ろに極わずかな薄い色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/dRmbJ1cSu4NzdA48W82go00", soldOut:false },
+  { id:2,  name:"EC Logo Tee",               brand:"LETITRIDE",                size:"OS",   price:3200,  grade:"C", img:"assets/products/p02.jpg", imgs:14, kata:"51.5cm", miba:"53.0cm", take:"69.0cm", sode:"23.5cm", cond:"数箇所に僅かな色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/8x214n2dQa7TeE88W82go01", soldOut:false },
+  { id:3,  name:"Raglan Tee",                brand:"APE SHALL NEVER KILL APE", size:"L",    price:4500,  grade:"C", img:"assets/products/p03.jpg", imgs:11, kata:"—",      miba:"58.0cm", take:"55.0cm", sode:"ラグラン裄丈 91cm", cond:"数箇所に薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/8x25kDdWydk59jOdco2go02", soldOut:false },
+  { id:4,  name:"DIGITAL CAMO RAIN JACKET",   brand:"A BATHING APE",            size:"L",    price:45000, grade:"C", img:"assets/products/p04.jpg", imgs:15, kata:"—",      miba:"66.0cm", take:"75.5cm", sode:"ラグラン裄丈 約89cm", cond:"所々に色あせ、左脇に穴がございます。着用に問題はございません。" , link:"https://buy.stripe.com/28E5kDdWydk567C8W82go03", soldOut:false },
+  { id:5,  name:"DIGITAL CAMO SHIRT JACKET",  brand:"A BATHING APE",            size:"M",    price:30000, grade:"C", img:"assets/products/p05.jpg", imgs:13, kata:"45.0cm", miba:"55.5cm", take:"70.0cm", sode:"59.5cm", cond:"首周りと正面に極わずかな薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/14A7sL3hUbbX8fKc8k2go04", soldOut:false },
+  { id:6,  name:"Logo Print Tee",            brand:"FRESH SCREEN",             size:"M",    price:3500,  grade:"C", img:"assets/products/p06.jpg", imgs:9,  kata:"47.0cm", miba:"51.0cm", take:"64.5cm", sode:"22.5cm", cond:"後ろに極わずかな色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/5kQ4gz4lY1Bn9jO8W82go05", soldOut:false },
+  { id:7,  name:"Vintage Graphic Tee",       brand:"UNKNOWN",                  size:"—",    price:2500,  grade:"C", img:"assets/products/p07.jpg", imgs:8,  kata:"49.0cm", miba:"51.0cm", take:"67.5cm", sode:"22.5cm", cond:"数箇所に極わずかな薄い色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/cNi9ATcSu7ZL3Zudco2go06", soldOut:false },
+  { id:8,  name:"Lightning Graphic Tee",     brand:"UNDERCOVER",               size:"M",    price:9500,  grade:"B", img:"assets/products/p08.jpg", imgs:9,  kata:"49.0cm", miba:"52.0cm", take:"61.5cm", sode:"18.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" , link:"https://buy.stripe.com/6oUaEXf0CfsdanSfkw2go07", soldOut:false },
+  { id:9,  name:"Vintage Print Tee",         brand:"Hanes",                    size:"M",    price:2200,  grade:"C", img:"assets/products/p09.jpg", imgs:9,  kata:"48.5cm", miba:"50.0cm", take:"67.5cm", sode:"18.5cm", cond:"数箇所に小さな汚れ、首周りに極わずかな穴がございます。着用に問題はございません。" , link:"https://buy.stripe.com/dRmaEX19M6VH3Zuegs2go08", soldOut:false },
+  { id:10, name:"Character Graphic Tee",     brand:"UNDERCOVER",               size:"M",    price:9800,  grade:"B", img:"assets/products/p10.jpg", imgs:9,  kata:"44.5cm", miba:"45.0cm", take:"61.0cm", sode:"16.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" , link:"https://buy.stripe.com/cNi9AT8Cedk5dA42xK2go09", soldOut:false },
+  { id:11, name:"ALOHA GIRL SWEAT",           brand:"HYSTERIC GLAMOUR",         size:"FREE", price:23000, grade:"C", img:"assets/products/p11.jpg", imgs:10, kata:"—",      miba:"54.0cm", take:"55.0cm", sode:"ラグラン裄丈 約84.5cm", cond:"前後に極わずかな小さな汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/28EcN5aKm1Bn9jOegs2go0a", soldOut:false },
+  { id:12, name:"BXH Print Tee",            brand:"BOUNTY HUNTER",            size:"L",    price:6000,  grade:"C", img:"assets/products/p12.jpg", imgs:12, kata:"46.5cm", miba:"53.0cm", take:"69.0cm", sode:"23.0cm", cond:"数箇所に極わずかな薄い色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/aFa9ATbOq0xjdA46O02go0b", soldOut:false },
+  { id:13, name:"Graphic Tee",              brand:"HYSTERIC GLAMOUR",         size:"FREE", price:3800,  grade:"C", img:"assets/products/p13.jpg", imgs:9,  kata:"41.0cm", miba:"44.5cm", take:"63.0cm", sode:"21.5cm", cond:"正面に極わずかな小さな色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/7sY8wP4lYbbX1Rmfkw2go0c", soldOut:false },
+  { id:14, name:"CAMISOLE",                  brand:"HYSTERIC GLAMOUR",         size:"FREE", price:14000, grade:"B", img:"assets/products/p14.jpg", imgs:7,  kata:"29.0cm", miba:"30.0cm", take:"49.0cm", sode:"—",      cond:"目立った傷や汚れは無く問題なくご着用頂けます。" , link:"https://buy.stripe.com/5kQ6oH3hU5RD67C5JW2go0d", soldOut:false },
+  { id:15, name:"HGC SWEATSHIRT",            brand:"HYSTERIC GLAMOUR",         size:"FREE", price:24000, grade:"B", img:"assets/products/p15.jpg", imgs:7,  kata:"41.0cm", miba:"45.0cm", take:"57.0cm", sode:"61.0cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" , link:"https://buy.stripe.com/fZu5kD4lY7ZLdA4a0c2go0e", soldOut:false },
+  { id:16, name:"Graphic Tee",             brand:"UNDERCOVER",                size:"M",    price:7500,  grade:"C", img:"assets/products/p16.jpg", imgs:10, kata:"46.5cm", miba:"49.0cm", take:"66.0cm", sode:"19.5cm", cond:"数箇所に僅かな色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/dRmeVdg4G93PdA48W82go0f", soldOut:false },
+  { id:17, name:"Raglan Pullover",          brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4200,  grade:"C", img:"assets/products/p17.jpg", imgs:10, kata:"—",      miba:"50.5cm", take:"57.0cm", sode:"ラグラン裄丈 約90.5cm", cond:"所々に小さな毛玉と正面に小さな穴がございます。着用に問題はございません。" , link:"https://buy.stripe.com/28E28rf0C1BngMg4FS2go0g", soldOut:false },
+  { id:18, name:"Lace Tank Top",            brand:"HYSTERIC GLAMOUR",         size:"FREE", price:4800,  grade:"B", img:"assets/products/p18.jpg", imgs:7,  kata:"25.0cm", miba:"31.0cm", take:"43.0cm", sode:"—",      cond:"目立った傷や汚れは無く問題なくご着用頂けます。" , link:"https://buy.stripe.com/4gMfZhdWy5RDbrWb4g2go0h", soldOut:false },
+  { id:19, name:"EC Logo Tee",             brand:"EMPIRE COMPANY INC.",       size:"L",    price:3500,  grade:"C", img:"assets/products/p19.jpg", imgs:8,  kata:"53.5cm", miba:"53.5cm", take:"70.5cm", sode:"21.0cm", cond:"数箇所に小さな汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/9B6cN57ya5RDbrW3BO2go0i", soldOut:false },
+  { id:20, name:"Graphic Tee",             brand:"BALANCE",                   size:"L",    price:2800,  grade:"C", img:"assets/products/p20.jpg", imgs:9,  kata:"52.0cm", miba:"54.5cm", take:"67.5cm", sode:"22.0cm", cond:"正面プリントに極わずかな色移りがございます。着用に問題はございません。" , link:"https://buy.stripe.com/8x23cvaKm93P8fKc8k2go0j", soldOut:false },
+  { id:21, name:"Graphic Tee",             brand:"BALANCE",                   size:"L",    price:2800,  grade:"C", img:"assets/products/p21.jpg", imgs:11, kata:"54.0cm", miba:"54.0cm", take:"68.0cm", sode:"22.5cm", cond:"数箇所に小さな汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/bJe28rcSu7ZL0Ni4FS2go0k", soldOut:false },
+  { id:22, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"M",    price:3200,  grade:"C", img:"assets/products/p22.jpg", imgs:9,  kata:"48.0cm", miba:"51.0cm", take:"63.0cm", sode:"21.0cm", cond:"数箇所に僅かな色あせ、首周りに薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/fZu5kD9GibbXanSegs2go0l", soldOut:false },
+  { id:23, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"S",    price:3000,  grade:"C", img:"assets/products/p23.jpg", imgs:9,  kata:"44.5cm", miba:"47.0cm", take:"55.5cm", sode:"18.5cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/3cI9ATbOqcg18fKdco2go0m", soldOut:false },
+  { id:24, name:"Logo Print Tee",          brand:"FRESH SCREEN",              size:"L",    price:3200,  grade:"C", img:"assets/products/p24.jpg", imgs:9,  kata:"45.0cm", miba:"48.0cm", take:"68.5cm", sode:"23.0cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/28EcN59Gi2Fr67C7S42go0n", soldOut:false },
+  { id:25, name:"Vintage Tee",             brand:"UNITED SPORTS",             size:"S",    price:2500,  grade:"C", img:"assets/products/p25.jpg", imgs:8,  kata:"44.0cm", miba:"45.5cm", take:"60.0cm", sode:"18.5cm", cond:"数箇所に薄い色あせと薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/14AdR905IbbXdA48W82go0o", soldOut:false },
+  { id:26, name:"Print Tee",              brand:"FRUIT OF THE LOOM",          size:"M",    price:2200,  grade:"C", img:"assets/products/p26.jpg", imgs:8,  kata:"46.0cm", miba:"47.5cm", take:"67.0cm", sode:"19.0cm", cond:"数箇所に薄い色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/cNi14n2dQdk5gMg5JW2go0p", soldOut:false },
+  { id:27, name:"Oversized Graphic Tee",  brand:"CHAOTiC DISCORE",            size:"M",    price:3500,  grade:"C", img:"assets/products/p27.jpg", imgs:11, kata:"50.0cm", miba:"59.0cm", take:"69.0cm", sode:"24.5cm", cond:"数箇所に薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/4gMfZh6u6dk5brWb4g2go0q", soldOut:false },
+  { id:28, name:"Lace Tank Top",          brand:"HYSTERIC GLAMOUR",           size:"FREE", price:4500,  grade:"C", img:"assets/products/p28.jpg", imgs:9,  kata:"27.0cm", miba:"31.5cm", take:"43.5cm", sode:"—",      cond:"後ろに極わずかな薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/28EfZh5q293Pcw0a0c2go0r", soldOut:false },
+  { id:29, name:"BUTTERFLY GIRL T-SHIRT",brand:"HYSTERIC GLAMOUR",           size:"FREE", price:20000, grade:"B", img:"assets/products/p29.jpg", imgs:8,  kata:"37.5cm", miba:"41.5cm", take:"59.5cm", sode:"18.5cm", cond:"目立った傷や汚れは無く問題なくご着用頂けます。" , link:"https://buy.stripe.com/00w6oHf0Ccg1cw06O02go0s", soldOut:false },
+  { id:30, name:"Logo Pullover",          brand:"HYSTERIC GLAMOUR",           size:"FREE", price:3800,  grade:"C", img:"assets/products/p30.jpg", imgs:10, kata:"—",      miba:"50.5cm", take:"49.5cm", sode:"裄丈 約82cm", cond:"数箇所に極わずかな薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/dRmdR919M1Bn7bGgoA2go0t", soldOut:false },
+  { id:31, name:"Raglan Tee",             brand:"HYSTERIC GLAMOUR",           size:"FREE", price:4200,  grade:"C", img:"assets/products/p31.jpg", imgs:10, kata:"—",      miba:"51.0cm", take:"55.5cm", sode:"ラグラン裄丈 約88.5cm", cond:"数箇所に薄い色あせと汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/fZudR99Gi6VH2VqgoA2go0u", soldOut:false },
+  { id:32, name:"JONIO JACKET",            brand:"A BATHING APE",              size:"M",    price:42000, grade:"C", img:"assets/products/p32.jpg", imgs:14, kata:"49.0cm", miba:"55.5cm", take:"71.5cm", sode:"61.5cm", cond:"ジャケット、アイマスクの所々に色あせがございます。着用に問題はございません。" , link:"https://buy.stripe.com/5kQ00j6u6a7Tcw0b4g2go0v", soldOut:false },
+  { id:33, name:"Graphic Tee",           brand:"UNDERCOVER",                  size:"OS",   price:7200,  grade:"C", img:"assets/products/p33.jpg", imgs:11, kata:"—",      miba:"—",      take:"—",      sode:"—",      cond:"数箇所に極わずかな薄い汚れがございます。着用に問題はございません。" , link:"https://buy.stripe.com/cNifZhbOqa7T9jO1tG2go0w", soldOut:false },
 ];
 
 let cart = [];
@@ -444,17 +456,18 @@ const fmt = n => '¥' + n.toLocaleString('ja-JP') + ' JPY';
 function renderGrid() {
   const grid = document.getElementById('product-grid');
   grid.innerHTML = PRODUCTS.map(p => `
-    <div class="product-card" data-id="${p.id}" tabindex="0" role="button" aria-label="${p.name}">
+    <div class="product-card${p.soldOut ? ' sold-out' : ''}" data-id="${p.id}" tabindex="0" role="button" aria-label="${p.name}">
       <div class="product-img">
         <span class="grade-badge${p.grade === 'B' ? ' grade-B' : ''}">Grade ${p.grade}</span>
+        ${p.soldOut ? '<span class="sold-badge">Sold Out</span>' : ''}
         <img src="${p.img}" alt="${p.name}" loading="lazy">
         <div class="product-hover">
-          <button class="hover-cta" tabindex="-1">詳細を見る</button>
+          <button class="hover-cta" tabindex="-1">${p.soldOut ? 'Sold Out' : '詳細を見る'}</button>
         </div>
       </div>
       <div class="product-info">
         <div class="product-fullname">${p.brand} ${p.name}</div>
-        <div class="product-price">${fmt(p.price)}</div>
+        <div class="product-price">${p.soldOut ? '<span style="color:var(--gray-3)">SOLD OUT</span>' : fmt(p.price)}</div>
       </div>
     </div>`).join('');
 
@@ -547,9 +560,15 @@ function openModal(id) {
     .join('');
 
   const btn = document.getElementById('modal-add');
-  const inCart = cart.some(i => i.id === id);
-  btn.textContent = inCart ? 'カート済み' : 'カートに追加';
-  btn.classList.toggle('added', inCart);
+  if (p.soldOut) {
+    btn.textContent = 'SOLD OUT';
+    btn.className = 'modal-add sold';
+    btn.onclick = null;
+  } else {
+    btn.textContent = '今すぐ購入 →';
+    btn.className = 'modal-add';
+    btn.onclick = () => window.open(p.link, '_blank');
+  }
 
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -571,15 +590,7 @@ document.addEventListener('keydown', e => {
 document.getElementById('gal-prev').addEventListener('click', () => { if (galIndex > 0) setGalImage(galIndex - 1); });
 document.getElementById('gal-next').addEventListener('click', () => { if (galIndex < galImages.length - 1) setGalImage(galIndex + 1); });
 
-document.getElementById('modal-add').addEventListener('click', () => {
-  if (!activeId || cart.some(i => i.id === activeId)) return;
-  cart.push(PRODUCTS.find(p => p.id === activeId));
-  updateCart();
-  document.getElementById('modal-add').textContent = 'カート済み';
-  document.getElementById('modal-add').classList.add('added');
-  closeModal();
-  openCart();
-});
+// modal-add click is set dynamically in openModal()
 
 function openCart() {
   document.getElementById('cart-overlay').classList.add('open');
@@ -639,7 +650,13 @@ document.getElementById('nl-form').addEventListener('submit', e => {
   e.target.replaceWith(msg);
 });
 
-renderGrid();
+// Fetch sold-out list (update sold_out.json via Stripe webhook)
+fetch('sold_out.json').then(r => r.json()).then(ids => {
+  ids.forEach(id => {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (p) p.soldOut = true;
+  });
+}).catch(() => {}).finally(() => renderGrid());
 </script>
 </body>
 </html>
