@@ -297,18 +297,17 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 .hero {
   position: relative;
   height: 88vh;
-  background: var(--black);
+  background: #F5F3EF;
   overflow: hidden;
   cursor: pointer;
 }
-@media (max-width: 640px) { .hero { height: 60vh; } }
 .ss-slides { position: absolute; inset: 0; }
 .ss-slide {
   position: absolute; inset: 0;
-  opacity: 0; transition: opacity 0.8s ease;
+  opacity: 0; transition: opacity 2.8s ease;
 }
 .ss-slide.active { opacity: 1; }
-.ss-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.ss-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
 .ss-gradient {
   position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);
@@ -511,16 +510,12 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 }
 
 @media (max-width: 860px) {
-  .hero { min-height: 70vh; }
   .filters-bar { padding: 14px 20px; }
   .brand-story { padding: 64px 24px 56px; }
   .bs-badges { gap: 28px; }
   .faq-section { padding: 56px 24px; }
-  .countdown-wrap { padding: 14px 20px; }
 }
 @media (max-width: 600px) {
-  .hero { min-height: 60vh; padding: 56px 16px 48px; }
-  .hero-title { font-size: 48px; }
   .filters-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
   .cat-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
   .cat-tab { flex-shrink: 0; }
@@ -549,6 +544,43 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   nav { padding: 10px 16px; }
   .logo-main { font-size: 38px; }
   .nav-right { gap: 16px; }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  /* Slideshow */
+  .hero { height: 60vh; }
+  .ss-logo { font-size: clamp(32px, 9vw, 48px); }
+  .ss-tagline { font-size: 10px; margin: 10px 0 18px; }
+  .ss-overlay { inset: 0; justify-content: center; }
+  .ss-info { bottom: 40px; right: 12px; }
+  .ss-product-name { font-size: 8px; }
+  .ss-product-price { font-size: 11px; }
+  .ss-dots { bottom: 12px; gap: 5px; }
+  .ss-dot { width: 4px; height: 4px; }
+  .hero-cta { font-size: 8px; padding: 12px 22px; }
+
+  /* Cart full-width on mobile */
+  .cart-drawer { width: 100%; right: -100%; }
+
+  /* Newsletter */
+  .newsletter { padding: 52px 20px; margin-top: 40px; }
+  .nl-title { font-size: 28px; }
+  .nl-sub { font-size: 10px; }
+
+  /* Brand story */
+  .brand-story { padding: 52px 20px 40px; }
+  .bs-badges { gap: 20px; }
+
+  /* FAQ */
+  .faq-section { padding: 44px 20px; }
+  .faq-q { font-size: 11px; padding: 16px 0; }
+
+  /* Modal */
+  .modal-body { padding: 20px 16px 28px; }
+  .modal-name { font-size: 18px; }
+  .modal-price { font-size: 22px; }
+  .modal-meas { grid-template-columns: 1fr; gap: 8px; }
 }
 </style>
 <style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1776945");</style>
@@ -658,14 +690,6 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 <div class="search-bar" id="search-bar">
   <input class="search-input" id="search-input" type="text" data-i18n-placeholder="search.placeholder" placeholder="ブランド・商品名で検索..."/>
   <button class="search-close" id="search-close">×</button>
-</div>
-
-<!-- Countdown -->
-<div class="countdown-wrap" id="countdown-wrap">
-  <div class="countdown-inner">
-    <div class="countdown-label">Next Drop</div>
-    <div class="countdown-timer" id="countdown-timer">—</div>
-  </div>
 </div>
 
 <!-- Filters -->
@@ -1224,7 +1248,7 @@ const LANG = {
     'cart.empty':  'バッグは空です', 'cart.total': '合計',
     'cart.checkout': '購入手続きへ',
     'nl.title1': '知る人だけが、', 'nl.title2': '買える。',
-    'nl.sub': '毎週金曜20:00のDROPを、登録者は30分前に先行アクセス。', 'nl.btn': '先行アクセスリストに入る',
+    'nl.sub': '毎週金曜20:00のDROPを、登録者は30分前に先行アクセス。', 'nl.btn': 'リストに入る',
     'nl.note': 'スパムは送りません。DROP通知のみ。',
     'search.placeholder': 'ブランド・商品名で検索...',
     'search.noresults': '該当する商品が見つかりません',
@@ -1241,7 +1265,7 @@ const LANG = {
     'cart.empty':  'Your bag is empty', 'cart.total': 'Total',
     'cart.checkout': 'Checkout',
     'nl.title1': 'Only those who know, ', 'nl.title2': 'can buy.',
-    'nl.sub': 'Early access 30 min before every Friday 20:00 DROP.', 'nl.btn': 'Get Early Access',
+    'nl.sub': 'Early access 30 min before every Friday 20:00 DROP.', 'nl.btn': 'JOIN THE LIST',
     'nl.note': 'No spam. DROP notifications only.',
     'search.placeholder': 'Search brand or product...',
     'search.noresults': 'No products found',
