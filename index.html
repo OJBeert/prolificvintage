@@ -19,11 +19,11 @@ html { scroll-behavior: smooth; }
   --serif: 'Playfair Display', serif;
   --sans: 'Jost', sans-serif;
 }
-body { background: var(--white); color: var(--black); font-family: var(--sans); overflow-x: hidden; }
+body { background: #FAF8F5; color: var(--black); font-family: var(--sans); overflow-x: hidden; }
 
 /* ── TICKER ── */
 .ticker { background: var(--black); color: var(--white); padding: 9px 0; overflow: hidden; white-space: nowrap; }
-.ticker-inner { display: inline-block; animation: ticker 30s linear infinite; }
+.ticker-inner { display: inline-block; animation: ticker 25s linear infinite; }
 .ticker-inner span { margin: 0 40px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; }
 .ticker-inner .dot { color: var(--gray-3); }
 @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -34,7 +34,7 @@ nav {
   padding: 16px 40px;
   border-bottom: 1px solid var(--gray-2);
   position: sticky; top: 0;
-  background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); z-index: 200;
+  background: rgba(250,248,245,0.97); backdrop-filter: blur(12px); z-index: 200;
 }
 .nav-right { display: flex; gap: 32px; align-items: center; }
 
@@ -98,9 +98,7 @@ nav {
   width: 100%; height: 100%;
   object-fit: contain; object-position: center center;
   display: block;
-  transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.product-card:hover .product-img img { transform: scale(1.03); }
 
 /* Hover overlay */
 .product-hover {
@@ -295,6 +293,211 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 .checkout-btn { width: 100%; background: var(--black); color: var(--white); border: none; padding: 14px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
 .checkout-btn:hover { opacity: 0.75; }
 
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  background: var(--black);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+  padding: 80px 20px 60px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('assets/products/p32.jpg') center 30%/cover no-repeat;
+  opacity: 0.18; filter: grayscale(30%);
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gray-3); margin-bottom: 24px; font-family: var(--sans);
+}
+.hero-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(52px, 9vw, 100px);
+  letter-spacing: 0.03em; line-height: 0.92;
+  color: var(--white); margin-bottom: 22px;
+}
+.hero-sub {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(13px, 2vw, 17px); color: var(--gray-3);
+  line-height: 1.7; margin-bottom: 44px; max-width: 520px;
+}
+.hero-cta {
+  display: inline-block;
+  font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+  font-family: var(--sans); font-weight: 400;
+  color: var(--black); background: var(--white);
+  border: none; padding: 14px 32px; cursor: pointer;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.hero-cta:hover { opacity: 0.8; }
+
+/* ── COUNTDOWN ── */
+.countdown-wrap {
+  background: var(--black); color: var(--white);
+  padding: 16px 40px; text-align: center;
+}
+.countdown-inner { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+.countdown-label {
+  font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase;
+  font-family: var(--sans); color: var(--gray-3);
+}
+.countdown-timer {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(20px, 4vw, 34px);
+  letter-spacing: 0.1em; color: var(--white);
+}
+.countdown-drop {
+  font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #ff4444; font-family: var(--sans);
+  animation: cd-pulse 1s ease-in-out infinite;
+}
+@keyframes cd-pulse { 0%,100%{opacity:1} 50%{opacity:0.45} }
+
+/* ── FILTERS BAR ── */
+.filters-bar {
+  padding: 18px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--gray-2);
+}
+.cat-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.cat-tab {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--sans); padding: 7px 14px;
+  background: none; border: 1px solid var(--gray-2);
+  cursor: pointer; color: var(--gray-4); transition: all 0.18s;
+  white-space: nowrap;
+}
+.cat-tab:hover { border-color: var(--black); color: var(--black); }
+.cat-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.sort-select {
+  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-family: var(--sans); padding: 7px 28px 7px 12px;
+  border: 1px solid var(--gray-2); background: #FAF8F5;
+  color: var(--black); cursor: pointer; outline: none;
+  -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 10px center;
+  transition: border-color 0.18s;
+}
+.sort-select:hover { border-color: var(--black); }
+
+/* ── LAST-ONE BADGE ── */
+.last-badge {
+  position: absolute; bottom: 10px; left: 10px; z-index: 3;
+  font-size: 7.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 3px 7px; font-family: var(--sans);
+  background: rgba(168,50,25,0.9); color: #fff;
+}
+
+/* ── CARD: scale hover + crossfade ── */
+.product-card { transition: transform 0.3s ease; }
+.product-card:hover { transform: scale(1.02); }
+.img-primary { transition: opacity 0.4s ease; }
+.img-secondary {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: contain; object-position: center;
+  opacity: 0; transition: opacity 0.4s ease; display: block;
+}
+.product-card:hover .img-primary { opacity: 0; }
+.product-card:hover .img-secondary { opacity: 1; }
+
+/* ── MODAL: last-one indicator ── */
+.modal-last-one {
+  font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #a83219; font-family: var(--sans); margin-bottom: 10px;
+  display: none;
+}
+
+/* ── BRAND STORY ── */
+.brand-story {
+  padding: 100px 40px 80px;
+  max-width: 900px; margin: 0 auto;
+  text-align: center;
+}
+.bs-eyebrow {
+  font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+  color: var(--gray-3); margin-bottom: 18px;
+}
+.bs-heading {
+  font-family: var(--serif);
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 400; margin-bottom: 26px; line-height: 1.18;
+}
+.bs-body {
+  font-size: 13px; line-height: 2.1; color: var(--gray-4);
+  font-weight: 300; max-width: 640px; margin: 0 auto 52px;
+}
+.bs-badges { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.bs-badge {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  min-width: 90px;
+}
+.bs-badge-icon {
+  width: 44px; height: 44px; border: 1px solid var(--gray-2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--black);
+}
+.bs-badge-main {
+  font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-family: var(--sans); font-weight: 400; text-align: center; line-height: 1.6;
+}
+.bs-badge-sub { font-size: 8px; color: var(--gray-3); letter-spacing: 0.1em; }
+
+/* ── FAQ ── */
+.faq-section {
+  padding: 80px 40px;
+  border-top: 1px solid var(--gray-2);
+}
+.faq-inner { max-width: 760px; margin: 0 auto; }
+.faq-heading {
+  font-family: var(--serif); font-size: 28px; font-weight: 400;
+  margin-bottom: 36px; letter-spacing: 0.04em;
+}
+.faq-item { border-bottom: 1px solid var(--gray-2); }
+.faq-q {
+  width: 100%; text-align: left; background: none; border: none;
+  padding: 20px 0; cursor: pointer;
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.05em;
+  color: var(--black); display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; transition: color 0.18s;
+}
+.faq-q:hover { color: var(--gray-4); }
+.faq-q-icon { font-size: 20px; flex-shrink: 0; transition: transform 0.25s; line-height: 1; }
+.faq-item.open .faq-q-icon { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.32s ease, padding 0.32s ease;
+}
+.faq-item.open .faq-a { max-height: 240px; padding-bottom: 20px; }
+.faq-a p { font-size: 12px; line-height: 1.9; color: var(--gray-4); font-weight: 300; }
+
+/* ── NEWSLETTER note ── */
+.nl-note {
+  font-size: 9px; color: rgba(255,255,255,0.3);
+  margin-top: 14px; letter-spacing: 0.06em;
+}
+
+@media (max-width: 860px) {
+  .hero { min-height: 70vh; }
+  .filters-bar { padding: 14px 20px; }
+  .brand-story { padding: 64px 24px 56px; }
+  .bs-badges { gap: 28px; }
+  .faq-section { padding: 56px 24px; }
+  .countdown-wrap { padding: 14px 20px; }
+}
+@media (max-width: 600px) {
+  .hero { min-height: 60vh; padding: 56px 16px 48px; }
+  .hero-title { font-size: 48px; }
+  .filters-bar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .cat-tabs { width: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 2px; }
+  .cat-tab { flex-shrink: 0; }
+  .sort-select { align-self: flex-end; }
+}
+
 @media (max-width: 860px) {
   .product-grid { grid-template-columns: repeat(2, 1fr); }
   .modal {
@@ -405,27 +608,78 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   </div>
 </nav>
 
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Tokyo Vintage</div>
+    <h1 class="hero-title">東京発、<br>厳選された<br>アーカイブピース。</h1>
+    <p class="hero-sub">"Tokyo-curated archive pieces.<br>One of a kind, every drop."</p>
+    <a class="hero-cta" href="#shop">最新の入荷を見る &mdash; Shop New Arrivals</a>
+  </div>
+</section>
+
+
 <!-- Search bar -->
 <div class="search-bar" id="search-bar">
   <input class="search-input" id="search-input" type="text" data-i18n-placeholder="search.placeholder" placeholder="ブランド・商品名で検索..."/>
   <button class="search-close" id="search-close">×</button>
 </div>
 
-<!-- Section header -->
-<div class="section-head">
-  <div class="section-title">Current Drop</div>
-  <span class="item-count">33 pieces</span>
+<!-- Countdown -->
+<div class="countdown-wrap" id="countdown-wrap">
+  <div class="countdown-inner">
+    <div class="countdown-label">Next Drop</div>
+    <div class="countdown-timer" id="countdown-timer">—</div>
+  </div>
+</div>
+
+<!-- Filters -->
+<div class="filters-bar" id="shop">
+  <div class="cat-tabs" id="cat-tabs">
+    <button class="cat-tab active" data-cat="all">All</button>
+    <button class="cat-tab" data-cat="tshirts">T-Shirts</button>
+    <button class="cat-tab" data-cat="sweatshirts">Sweatshirts</button>
+    <button class="cat-tab" data-cat="jackets">Jackets</button>
+    <button class="cat-tab" data-cat="brands">Brands</button>
+  </div>
+  <select class="sort-select" id="sort-select" aria-label="Sort">
+    <option value="new">新着順 / New Arrivals</option>
+    <option value="price-asc">価格：安い順 / Price: Low</option>
+    <option value="price-desc">価格：高い順 / Price: High</option>
+  </select>
 </div>
 
 <!-- Product Grid -->
 <div class="product-grid" id="product-grid"></div>
 <div class="no-results" id="no-results" data-i18n="search.noresults">該当する商品が見つかりません</div>
 
+<!-- Brand Story -->
+<section class="brand-story" id="about">
+  <div class="bs-eyebrow">About</div>
+  <h2 class="bs-heading">About Prolific Vintage</h2>
+  <p class="bs-body" id="bs-body" data-i18n="bs.body">原宿、裏原宿、下北沢。東京のヴィンテージシーンを知り尽くしたキュレーターが、毎週厳選した一点物をお届けします。全品クリーニング・状態確認済み。単なる古着屋ではなく、次世代のクラシックを見つける場所。</p>
+  <div class="bs-badges">
+    <div class="bs-badge">
+      <div class="bs-badge-icon">✓</div>
+      <div class="bs-badge-main">全品一点物<br><span class="bs-badge-sub">One of a Kind</span></div>
+    </div>
+    <div class="bs-badge">
+      <div class="bs-badge-icon">✓</div>
+      <div class="bs-badge-main">クリーニング済み<br><span class="bs-badge-sub">Cleaned &amp; Checked</span></div>
+    </div>
+    <div class="bs-badge">
+      <div class="bs-badge-icon">✓</div>
+      <div class="bs-badge-main">毎週金曜 新入荷<br><span class="bs-badge-sub">Weekly Friday Drop</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- Newsletter -->
 <div class="newsletter">
   <div class="nl-eyebrow">Stay Prolific</div>
   <h2 class="nl-title"><span data-i18n="nl.title1">知る人だけが、</span><em data-i18n="nl.title2">買える。</em></h2>
-  <p class="nl-sub" data-i18n="nl.sub">毎週金曜、DROP前に届く。</p>
+  <p class="nl-sub" data-i18n="nl.sub">毎週金曜20:00のDROPを、登録者は30分前に先行アクセス。</p>
   <div id="mlb2-40421023" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-40421023">
     <div class="ml-form-align-center">
       <div class="ml-form-embedWrapper embedForm">
@@ -472,6 +726,32 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   </div>
 </div>
 
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <h2 class="faq-heading">FAQ</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q"><span>取り置きはできますか？ / Can I reserve items?</span><span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><p>DMで承っております。/ Reservations accepted via Instagram DM.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>返品・交換は？ / Returns &amp; exchanges?</span><span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><p>一点物のため原則不可。ご了承ください。/ As all items are one-of-a-kind vintage, returns and exchanges are generally not accepted.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>海外発送は？ / International shipping?</span><span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><p>対応可能です。送料は実費となります。/ Yes, we ship internationally. Shipping at actual cost.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>コンディションについて / About item condition</span><span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><p>ビンテージ品の特性上、使用感がある場合がございます。詳細は各商品ページの「コンディション」欄をご参照ください。/ Vintage items may show signs of wear. Please refer to each item's condition description for details.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- Footer -->
 <footer>
   <div class="footer-logo">
@@ -480,9 +760,9 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   </div>
   <ul class="footer-links">
     <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="#">Depop</a></li>
-    <li><a href="#">Contact</a></li>
-    <li><a href="#">FAQ</a></li>
+    <li><a href="#" aria-label="Depop (coming soon)">Depop</a></li><!-- TODO: Depop URL -->
+    <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Contact</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ul>
   <div class="footer-copy">© 2026 Prolific Vintage</div>
 </footer>
@@ -504,6 +784,7 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
       <div class="modal-eyebrow" id="modal-brand"></div>
       <div class="modal-name" id="modal-name"></div>
       <div class="modal-price" id="modal-price"></div>
+      <div class="modal-last-one" id="modal-last-one"></div>
       <span class="modal-grade-tag" id="modal-grade"></span>
       <hr class="modal-divider">
       <div class="modal-label" data-i18n="modal.size">Size</div>
@@ -575,17 +856,48 @@ const PRODUCTS = [
 
 let cart = [];
 let activeId = null;
+let currentCategory = 'all';
+let currentSort = 'new';
+let currentSearch = '';
 
 const fmt = n => '¥' + n.toLocaleString('ja-JP') + ' JPY';
 
+function getFilteredProducts() {
+  let products = [...PRODUCTS];
+  if (currentCategory === 'tshirts') {
+    products = products.filter(p => /tee|t-shirt|tank|camisole/i.test(p.name));
+  } else if (currentCategory === 'sweatshirts') {
+    products = products.filter(p => /sweat|pullover|sweatshirt/i.test(p.name));
+  } else if (currentCategory === 'jackets') {
+    products = products.filter(p => /jacket/i.test(p.name));
+  } else if (currentCategory === 'brands') {
+    const designers = ['A BATHING APE', 'UNDERCOVER', 'HYSTERIC GLAMOUR', 'BOUNTY HUNTER'];
+    products = products.filter(p => designers.includes(p.brand));
+  }
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    products = products.filter(p => (p.brand + ' ' + p.name).toLowerCase().includes(q));
+  }
+  if (currentSort === 'price-asc') products.sort((a, b) => a.price - b.price);
+  else if (currentSort === 'price-desc') products.sort((a, b) => b.price - a.price);
+  return products;
+}
+
 function renderGrid() {
+  const filtered = getFilteredProducts();
   const grid = document.getElementById('product-grid');
-  grid.innerHTML = PRODUCTS.map(p => `
+  grid.innerHTML = filtered.map(p => {
+    const pad = String(p.id).padStart(2, '0');
+    const sec = `assets/products/p${pad}_1.jpg`;
+    const lastBadge = p.soldOut ? '' : `<span class="last-badge">${currentLang === 'en' ? 'Only 1 Left' : '残り1点'}</span>`;
+    return `
     <div class="product-card${p.soldOut ? ' sold-out' : ''}" data-id="${p.id}" tabindex="0" role="button" aria-label="${p.name}">
       <div class="product-img">
         <span class="grade-badge${p.grade === 'B' ? ' grade-B' : ''}">Grade ${p.grade}</span>
         ${p.soldOut ? '<span class="sold-badge">Sold Out</span>' : ''}
-        <img src="${p.img}" alt="${p.name}" loading="lazy">
+        ${lastBadge}
+        <img class="img-primary" src="${p.img}" alt="${p.name}" loading="lazy">
+        <img class="img-secondary" src="${sec}" alt="" loading="lazy" aria-hidden="true">
         <div class="product-hover">
           <button class="hover-cta" tabindex="-1">${p.soldOut ? 'Sold Out' : (currentLang === 'en' ? 'View Details' : '詳細を見る')}</button>
         </div>
@@ -594,7 +906,10 @@ function renderGrid() {
         <div class="product-fullname">${p.brand} ${p.name}</div>
         <div class="product-price">${p.soldOut ? '<span style="color:var(--gray-3)">SOLD OUT</span>' : fmt(p.price)}</div>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
+
+  document.getElementById('no-results').style.display = filtered.length === 0 ? 'block' : 'none';
 
   grid.querySelectorAll('.product-card').forEach(el => {
     el.addEventListener('click', () => openModal(parseInt(el.dataset.id)));
@@ -677,6 +992,16 @@ function openModal(id) {
 
   document.getElementById('modal-size').textContent = p.size;
   document.getElementById('modal-cond').textContent = (currentLang === 'en' ? (p.cond_en || p.cond) : p.cond) || '';
+
+  const lastOneEl = document.getElementById('modal-last-one');
+  if (lastOneEl) {
+    if (!p.soldOut) {
+      lastOneEl.textContent = currentLang === 'en' ? '⚠ Only 1 Left' : '⚠ 残り1点';
+      lastOneEl.style.display = 'block';
+    } else {
+      lastOneEl.style.display = 'none';
+    }
+  }
 
   const pairs = [['肩幅', p.kata], ['身幅', p.miba], ['着丈', p.take], ['袖丈', p.sode]];
   document.getElementById('modal-meas').innerHTML = pairs
@@ -769,17 +1094,8 @@ document.getElementById('cart-overlay').addEventListener('click', closeCart);
 
 // ── SEARCH ──────────────────────────────────────────────────────────────
 function filterProducts(q) {
-  const query = q.trim().toLowerCase();
-  let visible = 0;
-  document.querySelectorAll('.product-card').forEach(card => {
-    const pid = parseInt(card.dataset.id);
-    const p = PRODUCTS.find(x => x.id === pid);
-    const text = `${p.brand} ${p.name}`.toLowerCase();
-    const show = !query || text.includes(query);
-    card.style.display = show ? '' : 'none';
-    if (show) visible++;
-  });
-  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+  currentSearch = q.trim();
+  renderGrid();
 }
 
 document.getElementById('search-btn').addEventListener('click', e => {
@@ -799,6 +1115,61 @@ document.addEventListener('keydown', e => {
   }
 });
 
+
+// Category tabs
+document.querySelectorAll('.cat-tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCategory = btn.dataset.cat;
+    renderGrid();
+  });
+});
+
+// Sort
+document.getElementById('sort-select').addEventListener('change', e => {
+  currentSort = e.target.value;
+  renderGrid();
+});
+
+// Countdown
+function nextFridayDropUTC() {
+  const now = new Date();
+  // Friday 20:00 JST = Friday 11:00 UTC
+  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 11, 0, 0));
+  const daysUntil = (5 - d.getUTCDay() + 7) % 7;
+  d.setUTCDate(d.getUTCDate() + daysUntil);
+  if (now >= d) d.setUTCDate(d.getUTCDate() + 7);
+  return d;
+}
+function updateCountdown() {
+  const wrap = document.getElementById('countdown-wrap');
+  const el = document.getElementById('countdown-timer');
+  if (!wrap || !el) return;
+  const diff = nextFridayDropUTC() - new Date();
+  if (diff <= 0) {
+    wrap.innerHTML = '<div class="countdown-drop">🔴 DROP NOW — 新着入荷中</div>';
+    return;
+  }
+  const pad = n => String(n).padStart(2, '0');
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  el.textContent = `NEXT DROP — ${d}日 ${pad(h)}時間 ${pad(m)}分 ${pad(s)}秒`;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
 
 // Fetch sold-out list (update sold_out.json via Stripe webhook)
 fetch('sold_out.json').then(r => r.json()).then(ids => {
@@ -820,10 +1191,12 @@ const LANG = {
     'cart.empty':  'バッグは空です', 'cart.total': '合計',
     'cart.checkout': '購入手続きへ',
     'nl.title1': '知る人だけが、', 'nl.title2': '買える。',
-    'nl.sub': '毎週金曜、DROP前に届く。', 'nl.btn': 'リストに入る',
+    'nl.sub': '毎週金曜20:00のDROPを、登録者は30分前に先行アクセス。', 'nl.btn': '先行アクセスリストに入る',
+    'nl.note': 'スパムは送りません。DROP通知のみ。',
     'search.placeholder': 'ブランド・商品名で検索...',
     'search.noresults': '該当する商品が見つかりません',
     'card.view': '詳細を見る',
+    'bs.body': '原宿、裏原宿、下北沢。東京のヴィンテージシーンを知り尽くしたキュレーターが、毎週厳選した一点物をお届けします。全品クリーニング・状態確認済み。単なる古着屋ではなく、次世代のクラシックを見つける場所。',
   },
   en: {
     'ticker.shipping':   'Free shipping (over ¥15,000)',
@@ -835,10 +1208,12 @@ const LANG = {
     'cart.empty':  'Your bag is empty', 'cart.total': 'Total',
     'cart.checkout': 'Checkout',
     'nl.title1': 'Only those who know, ', 'nl.title2': 'can buy.',
-    'nl.sub': 'Delivered before every Friday DROP.', 'nl.btn': 'Join the list',
+    'nl.sub': 'Early access 30 min before every Friday 20:00 DROP.', 'nl.btn': 'Get Early Access',
+    'nl.note': 'No spam. DROP notifications only.',
     'search.placeholder': 'Search brand or product...',
     'search.noresults': 'No products found',
     'card.view': 'View Details',
+    'bs.body': 'Curated from Harajuku, Ura-Harajuku, and Shimokitazawa — Tokyo\'s vintage epicenters. Every piece is cleaned and condition-checked. One of a kind, every week.',
   }
 };
 
