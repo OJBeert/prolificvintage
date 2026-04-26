@@ -293,39 +293,47 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
 .checkout-btn { width: 100%; background: var(--black); color: var(--white); border: none; padding: 14px; font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
 .checkout-btn:hover { opacity: 0.75; }
 
-/* ── HERO ── */
+/* ── HERO / SLIDESHOW ── */
 .hero {
   position: relative;
-  min-height: 85vh;
+  height: 88vh;
   background: var(--black);
+  overflow: hidden;
+  cursor: pointer;
+}
+@media (max-width: 640px) { .hero { height: 60vh; } }
+.ss-slides { position: absolute; inset: 0; }
+.ss-slide {
+  position: absolute; inset: 0;
+  opacity: 0; transition: opacity 0.8s ease;
+}
+.ss-slide.active { opacity: 1; }
+.ss-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ss-gradient {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none; z-index: 1;
+}
+.ss-overlay {
+  position: absolute; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  overflow: hidden; text-align: center;
-  padding: 80px 20px 60px;
+  text-align: center; pointer-events: none; z-index: 2;
 }
-.hero-bg {
-  position: absolute; inset: 0;
-  background: url('assets/products/p32.jpg') center 30%/cover no-repeat;
-  opacity: 0.18; filter: grayscale(30%);
-}
-.hero-content { position: relative; z-index: 1; }
-.hero-eyebrow {
-  font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-  color: var(--gray-3); margin-bottom: 24px; font-family: var(--sans);
-}
-.hero-title {
+.ss-logo {
   font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(52px, 9vw, 100px);
-  letter-spacing: 0.03em; line-height: 0.92;
-  color: var(--white); margin-bottom: 22px;
+  font-size: clamp(48px, 8vw, 96px);
+  letter-spacing: 0.05em; line-height: 0.9;
+  color: var(--white); opacity: 0.85;
 }
-.hero-sub {
+.ss-logo span { font-size: 0.52em; letter-spacing: 0.22em; display: block; }
+.ss-tagline {
   font-family: var(--serif); font-style: italic;
-  font-size: clamp(13px, 2vw, 17px); color: var(--gray-3);
-  line-height: 1.7; margin-bottom: 44px; max-width: 520px;
+  font-size: clamp(12px, 1.8vw, 16px);
+  color: rgba(255,255,255,0.75); margin: 18px 0 32px;
 }
 .hero-cta {
-  display: inline-block;
+  display: inline-block; pointer-events: all;
   font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
   font-family: var(--sans); font-weight: 400;
   color: var(--black); background: var(--white);
@@ -333,6 +341,27 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   text-decoration: none; transition: opacity 0.2s;
 }
 .hero-cta:hover { opacity: 0.8; }
+.ss-info {
+  position: absolute; bottom: 56px; right: 20px;
+  z-index: 3; text-align: right; pointer-events: none;
+}
+.ss-product-name {
+  display: block; font-size: 9px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.8); font-family: var(--sans);
+}
+.ss-product-price {
+  display: block; font-family: var(--serif); font-style: italic;
+  font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 3px;
+}
+.ss-dots {
+  position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 3;
+}
+.ss-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(255,255,255,0.4); transition: background 0.3s; cursor: pointer; pointer-events: all;
+}
+.ss-dot.active { background: var(--white); }
 
 /* ── COUNTDOWN ── */
 .countdown-wrap {
@@ -608,15 +637,20 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- Hero Slideshow -->
 <section class="hero" id="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Tokyo Vintage</div>
-    <h1 class="hero-title">東京発、<br>厳選された<br>アーカイブピース。</h1>
-    <p class="hero-sub">"Tokyo-curated archive pieces.<br>One of a kind, every drop."</p>
-    <a class="hero-cta" href="#shop">最新の入荷を見る &mdash; Shop New Arrivals</a>
+  <div class="ss-slides" id="ss-slides"></div>
+  <div class="ss-gradient" aria-hidden="true"></div>
+  <div class="ss-info" id="ss-info">
+    <span class="ss-product-name" id="ss-product-name"></span>
+    <span class="ss-product-price" id="ss-product-price"></span>
   </div>
+  <div class="ss-overlay">
+    <div class="ss-logo">PRO-LIFIC<br><span>VINTAGE</span></div>
+    <p class="ss-tagline">東京発、厳選されたアーカイブピース。</p>
+    <a class="hero-cta" href="#shop">Shop the Drop ↓</a>
+  </div>
+  <div class="ss-dots" id="ss-dots"></div>
 </section>
 
 
@@ -760,7 +794,6 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   </div>
   <ul class="footer-links">
     <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="#" aria-label="Depop (coming soon)">Depop</a></li><!-- TODO: Depop URL -->
     <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Contact</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -1034,8 +1067,8 @@ document.getElementById('modal-close').addEventListener('click', closeModal);
 document.getElementById('modal-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
-  if (e.key === 'ArrowLeft' && galIndex > 0) setGalImage(galIndex - 1);
-  if (e.key === 'ArrowRight' && galIndex < galImages.length - 1) setGalImage(galIndex + 1);
+  if (e.key === 'ArrowLeft')  { if (activeId !== null) { if (galIndex > 0) setGalImage(galIndex - 1); } else ssGo(ssIndex - 1); }
+  if (e.key === 'ArrowRight') { if (activeId !== null) { if (galIndex < galImages.length - 1) setGalImage(galIndex + 1); } else ssGo(ssIndex + 1); }
 });
 document.getElementById('gal-prev').addEventListener('click', () => { if (galIndex > 0) setGalImage(galIndex - 1); });
 document.getElementById('gal-next').addEventListener('click', () => { if (galIndex < galImages.length - 1) setGalImage(galIndex + 1); });
@@ -1242,8 +1275,67 @@ document.getElementById('lang-btn').addEventListener('click', () => {
   applyLang(currentLang === 'jp' ? 'en' : 'jp');
 });
 
+// ── SLIDESHOW ──
+let ssProducts = [], ssIndex = 0, ssTimer = null;
+
+function initSlideshow() {
+  if (!PRODUCTS.length) return;
+  ssProducts = [...PRODUCTS].sort(() => Math.random() - 0.5);
+  const slidesEl = document.getElementById('ss-slides');
+  const dotsEl   = document.getElementById('ss-dots');
+  slidesEl.innerHTML = '';
+  dotsEl.innerHTML   = '';
+  ssProducts.forEach((p, i) => {
+    const img = document.createElement('img');
+    img.src = `assets/products/${p.img}`;
+    img.alt = p.name;
+    if (i < 2) { img.loading = 'eager'; img.fetchPriority = 'high'; }
+    const slide = document.createElement('div');
+    slide.className = 'ss-slide' + (i === 0 ? ' active' : '');
+    slide.dataset.id = p.id;
+    slide.appendChild(img);
+    slide.addEventListener('click', () => openModal(p.id));
+    slidesEl.appendChild(slide);
+    const dot = document.createElement('div');
+    dot.className = 'ss-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', e => { e.stopPropagation(); ssGo(i); });
+    dotsEl.appendChild(dot);
+  });
+  updateSlideInfo(0);
+  startSlideshow();
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { clearInterval(ssTimer); ssTimer = null; }
+    else startSlideshow();
+  });
+}
+
+function ssGo(idx) {
+  const slides = document.querySelectorAll('.ss-slide');
+  const dots   = document.querySelectorAll('.ss-dot');
+  if (!slides.length) return;
+  slides[ssIndex].classList.remove('active');
+  dots[ssIndex].classList.remove('active');
+  ssIndex = ((idx % slides.length) + slides.length) % slides.length;
+  slides[ssIndex].classList.add('active');
+  dots[ssIndex].classList.add('active');
+  updateSlideInfo(ssIndex);
+}
+
+function updateSlideInfo(idx) {
+  const p = ssProducts[idx];
+  if (!p) return;
+  document.getElementById('ss-product-name').textContent  = p.name;
+  document.getElementById('ss-product-price').textContent = '¥' + p.price.toLocaleString();
+}
+
+function startSlideshow() {
+  clearInterval(ssTimer);
+  ssTimer = setInterval(() => ssGo(ssIndex + 1), 5000);
+}
+
 // Apply saved language on load
 applyLang(currentLang);
+initSlideshow();
 
 </script>
 
