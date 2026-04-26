@@ -324,12 +324,14 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   font-size: clamp(48px, 8vw, 96px);
   letter-spacing: 0.05em; line-height: 0.9;
   color: var(--white); opacity: 0.85;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.5);
 }
 .ss-logo span { font-size: 0.52em; letter-spacing: 0.22em; display: block; }
 .ss-tagline {
   font-family: var(--serif); font-style: italic;
   font-size: clamp(12px, 1.8vw, 16px);
   color: rgba(255,255,255,0.75); margin: 18px 0 32px;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.45);
 }
 .hero-cta {
   display: inline-block; pointer-events: all;
@@ -552,7 +554,6 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   .hero { height: 60vh; }
   .ss-logo { font-size: clamp(32px, 9vw, 48px); }
   .ss-tagline { font-size: 10px; margin: 10px 0 18px; }
-  .ss-overlay { inset: 0; justify-content: center; }
   .ss-info { bottom: 40px; right: 12px; }
   .ss-product-name { font-size: 8px; }
   .ss-product-price { font-size: 11px; }
@@ -1189,34 +1190,6 @@ document.getElementById('sort-select').addEventListener('change', e => {
   renderGrid();
 });
 
-// Countdown
-function nextFridayDropUTC() {
-  const now = new Date();
-  // Friday 20:00 JST = Friday 11:00 UTC
-  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 11, 0, 0));
-  const daysUntil = (5 - d.getUTCDay() + 7) % 7;
-  d.setUTCDate(d.getUTCDate() + daysUntil);
-  if (now >= d) d.setUTCDate(d.getUTCDate() + 7);
-  return d;
-}
-function updateCountdown() {
-  const wrap = document.getElementById('countdown-wrap');
-  const el = document.getElementById('countdown-timer');
-  if (!wrap || !el) return;
-  const diff = nextFridayDropUTC() - new Date();
-  if (diff <= 0) {
-    wrap.innerHTML = '<div class="countdown-drop">🔴 DROP NOW — 新着入荷中</div>';
-    return;
-  }
-  const pad = n => String(n).padStart(2, '0');
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  el.textContent = `NEXT DROP — ${d}日 ${pad(h)}時間 ${pad(m)}分 ${pad(s)}秒`;
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(btn => {
