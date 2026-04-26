@@ -765,19 +765,19 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   <div class="faq-inner">
     <h2 class="faq-heading">FAQ</h2>
     <div class="faq-list">
-      <div class="faq-item">
+      <div class="faq-item open">
         <button class="faq-q"><span>取り置きはできますか？ / Can I reserve items?</span><span class="faq-q-icon">+</span></button>
         <div class="faq-a"><p>DMで承っております。/ Reservations accepted via Instagram DM.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item open">
         <button class="faq-q"><span>返品・交換は？ / Returns &amp; exchanges?</span><span class="faq-q-icon">+</span></button>
         <div class="faq-a"><p>一点物のため原則不可。ご了承ください。/ As all items are one-of-a-kind vintage, returns and exchanges are generally not accepted.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item open">
         <button class="faq-q"><span>海外発送は？ / International shipping?</span><span class="faq-q-icon">+</span></button>
         <div class="faq-a"><p>対応可能です。送料は実費となります。/ Yes, we ship internationally. Shipping at actual cost.</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item open">
         <button class="faq-q"><span>コンディションについて / About item condition</span><span class="faq-q-icon">+</span></button>
         <div class="faq-a"><p>ビンテージ品の特性上、使用感がある場合がございます。詳細は各商品ページの「コンディション」欄をご参照ください。/ Vintage items may show signs of wear. Please refer to each item's condition description for details.</p></div>
       </div>
@@ -1287,7 +1287,7 @@ function initSlideshow() {
   dotsEl.innerHTML   = '';
   ssProducts.forEach((p, i) => {
     const img = document.createElement('img');
-    img.src = `assets/products/${p.img}`;
+    img.src = p.img;
     img.alt = p.name;
     if (i < 2) { img.loading = 'eager'; img.fetchPriority = 'high'; }
     const slide = document.createElement('div');
