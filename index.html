@@ -62,9 +62,8 @@ nav {
 .no-results { padding: 60px; text-align: center; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-3); display: none; }
 .nav-link { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; color: var(--black); text-decoration: none; opacity: 0.55; transition: opacity 0.2s; }
 .nav-link:hover { opacity: 1; }
-.nav-logo { display: flex; flex-direction: column; align-items: flex-start; color: var(--black); text-decoration: none; }
-.logo-main { font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif; font-size: 64px; letter-spacing: 0.015em; line-height: 0.9; display: inline-block; border-bottom: 2.5px solid var(--black); padding-bottom: 5px; margin-bottom: 5px; }
-.logo-sub { font-family: var(--sans); font-size: 10px; letter-spacing: 0.62em; text-transform: uppercase; font-weight: 400; }
+.nav-logo { display: flex; align-items: center; color: var(--black); text-decoration: none; }
+.nav-logo-img { height: 96px; width: auto; display: block; }
 .cart-btn { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400; background: none; border: none; cursor: pointer; color: var(--black); display: flex; align-items: center; gap: 8px; opacity: 0.55; transition: opacity 0.2s; font-family: var(--sans); }
 .cart-btn:hover { opacity: 1; }
 .cart-count-badge { width: 15px; height: 15px; background: var(--black); color: var(--white); font-size: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
@@ -558,7 +557,7 @@ footer { padding: 36px 40px 28px; display: grid; grid-template-columns: 1fr auto
   .modal-main-img { aspect-ratio: 1 / 1; flex: none; }
   .modal-body { overflow-y: visible; padding: 24px 20px 32px; }
   nav { padding: 12px 16px; }
-  .logo-main { font-size: 46px; }
+  .nav-logo-img { height: 76px; }
   footer { grid-template-columns: 1fr; gap: 16px; text-align: center; padding: 28px 20px; }
   .footer-logo { align-items: center; }
   .footer-copy { text-align: center; }
@@ -569,7 +568,7 @@ footer { padding: 36px 40px 28px; display: grid; grid-template-columns: 1fr auto
 
 @media (max-width: 600px) {
   nav { padding: 10px 16px; }
-  .logo-main { font-size: 38px; }
+  .nav-logo-img { height: 64px; }
   .nav-right { gap: 16px; }
 }
 
@@ -682,8 +681,7 @@ footer { padding: 36px 40px 28px; display: grid; grid-template-columns: 1fr auto
 <!-- Nav -->
 <nav>
   <a class="nav-logo" href="#">
-    <span class="logo-main">PRO-LIFIC</span>
-    <span class="logo-sub">VINTAGE</span>
+    <img src="assets/prolific-logo.png" alt="PRO-LIFIC VINTAGE" class="nav-logo-img"/>
   </a>
   <div class="nav-right">
     <button class="lang-btn" id="lang-btn">EN</button>
@@ -839,8 +837,7 @@ footer { padding: 36px 40px 28px; display: grid; grid-template-columns: 1fr auto
 <!-- Footer -->
 <footer>
   <div class="footer-logo">
-    <span class="footer-logo-main">PRO-LIFIC</span>
-    <span class="footer-logo-sub">VINTAGE</span>
+    <img src="assets/prolific-logo.png" alt="PRO-LIFIC VINTAGE" style="height:48px;width:auto;display:block;"/>
   </div>
   <ul class="footer-links">
     <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Instagram</a></li>
