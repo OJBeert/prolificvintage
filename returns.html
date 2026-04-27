@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>返品ポリシー — Prolific Vintage</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --white: #ffffff; --black: #0c0c0c;
+  --gray-1: #f5f5f5; --gray-2: #e8e8e8; --gray-3: #b0b0b0; --gray-4: #666666;
+  --serif: 'Playfair Display', serif; --sans: 'Jost', sans-serif;
+}
+body { background: #FAF8F5; color: var(--black); font-family: var(--sans); line-height: 1.7; }
+a { color: var(--black); }
+nav { padding: 14px 40px; border-bottom: 1px solid var(--gray-2); display: flex; align-items: center; gap: 20px; }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.04em; text-decoration: none; color: var(--black); }
+.nav-back { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-3); text-decoration: none; transition: color 0.2s; }
+.nav-back:hover { color: var(--black); }
+.page-wrap { max-width: 760px; margin: 0 auto; padding: 60px 40px 100px; }
+.page-title { font-family: var(--serif); font-size: 28px; font-weight: 400; letter-spacing: 0.04em; margin-bottom: 10px; }
+.page-sub { font-size: 11px; color: var(--gray-3); letter-spacing: 0.08em; margin-bottom: 48px; }
+.policy-block {
+  border: 1px solid var(--gray-2); padding: 36px 40px; margin-bottom: 32px;
+}
+.policy-block h2 { font-family: var(--sans); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-4); margin-bottom: 16px; }
+.policy-block p { font-size: 13px; font-weight: 300; line-height: 1.95; }
+.policy-block p + p { margin-top: 14px; }
+.notice {
+  background: var(--black); color: var(--white); padding: 24px 40px;
+  font-size: 11px; letter-spacing: 0.06em; line-height: 1.9; font-weight: 300;
+}
+.notice strong { font-weight: 500; letter-spacing: 0.1em; }
+footer { padding: 28px 40px; border-top: 1px solid var(--gray-2); text-align: center; font-size: 9px; color: var(--gray-3); letter-spacing: 0.08em; }
+@media (max-width: 600px) {
+  nav { padding: 12px 20px; }
+  .page-wrap { padding: 40px 20px 80px; }
+  .policy-block { padding: 24px 20px; }
+  .notice { padding: 20px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">PRO-LIFIC</a>
+  <a class="nav-back" href="index.html">← Back</a>
+</nav>
+
+<div class="page-wrap">
+  <h1 class="page-title">返品ポリシー</h1>
+  <p class="page-sub">Returns &amp; Exchanges Policy</p>
+
+  <div class="notice">
+    <strong>お客様都合による返品・交換はお断りしております。</strong><br>
+    全商品一点物のヴィンテージ品のため、ご了承ください。
+  </div>
+
+  <div class="policy-block" style="margin-top:32px">
+    <h2>返品をお断りする場合</h2>
+    <p>商品の性質上、以下に該当する場合は返品・交換をお受けできません。</p>
+    <p>・サイズ違い・イメージ違いなどお客様都合によるもの<br>
+       ・商品ページに記載済みのコンディション（色あせ・汚れ・使用感）に起因するもの<br>
+       ・商品到着後7日を経過したもの<br>
+       ・タグ・包装を除去・損傷させたもの</p>
+  </div>
+
+  <div class="policy-block">
+    <h2>返品・対応をお受けする場合</h2>
+    <p>以下に該当する場合は、到着後7日以内にメールにてご連絡ください。</p>
+    <p>・不良品（商品ページに記載のないダメージ・欠陥）<br>
+       ・誤送（注文と異なる商品が届いた場合）</p>
+    <p>対応方法（返金・交換・一部返金等）はケースバイケースで誠実に対応いたします。送料はご負担いただく場合がございます。</p>
+  </div>
+
+  <div class="policy-block">
+    <h2>お問い合わせ先</h2>
+    <p>返品に関するお問い合わせは以下までご連絡ください。<br>
+    <!-- TODO: 要入力 -->【要入力：メールアドレス】<br>
+    件名に「返品について」とご記載のうえ、注文番号・商品名・状況の写真をお送りください。</p>
+  </div>
+</div>
+
+<footer>© 2026 Prolific Vintage</footer>
+</body>
+</html>

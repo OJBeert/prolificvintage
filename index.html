@@ -257,14 +257,35 @@ nav {
 .nl-success { font-family: var(--serif); font-size: 17px; font-style: italic; color: rgba(255,255,255,0.6); }
 
 /* ── FOOTER ── */
-footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid var(--gray-2); }
+footer { padding: 36px 40px 28px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-top: 1px solid var(--gray-2); row-gap: 24px; }
 .footer-logo { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
 .footer-logo-main { font-family: 'Bebas Neue', Impact, 'Arial Black', sans-serif; font-size: 26px; letter-spacing: 0.015em; display: inline-block; border-bottom: 1.5px solid var(--black); padding-bottom: 3px; margin-bottom: 3px; }
 .footer-logo-sub { font-family: var(--sans); font-size: 7.5px; letter-spacing: 0.62em; text-transform: uppercase; }
 .footer-links { display: flex; gap: 28px; list-style: none; justify-content: center; }
-.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-4); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--black); }
+.footer-links a { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-4); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+.footer-links a:hover, .footer-links button:hover { color: var(--black); }
+.footer-links button { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-4); background: none; border: none; font-family: var(--sans); cursor: pointer; transition: color 0.2s; padding: 0; }
 .footer-copy { font-size: 9px; color: var(--gray-3); text-align: right; letter-spacing: 0.05em; }
+.footer-legal { grid-column: 1 / -1; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; padding-top: 20px; border-top: 1px solid var(--gray-2); }
+.footer-legal a { font-size: 10px; color: var(--gray-3); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+.footer-legal a:hover { color: var(--black); }
+.footer-pay { grid-column: 1 / -1; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.pay-badge { font-family: var(--sans); font-size: 7.5px; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid var(--gray-2); padding: 3px 9px; color: var(--gray-3); }
+/* ── CONTACT MODAL ── */
+.contact-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.25s; display: flex; align-items: center; justify-content: center; }
+.contact-overlay.open { opacity: 1; pointer-events: all; }
+.contact-modal { background: var(--white); width: 100%; max-width: 480px; padding: 48px 40px 40px; position: relative; margin: 20px; }
+.contact-title { font-family: var(--serif); font-size: 22px; font-weight: 400; margin-bottom: 6px; }
+.contact-sub { font-size: 10px; color: var(--gray-3); letter-spacing: 0.08em; margin-bottom: 28px; }
+.contact-field { margin-bottom: 16px; }
+.contact-field input, .contact-field textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--gray-2); background: var(--white); font-family: var(--sans); font-size: 12px; color: var(--black); outline: none; transition: border-color 0.2s; resize: vertical; }
+.contact-field input:focus, .contact-field textarea:focus { border-color: var(--black); }
+.contact-field textarea { min-height: 100px; }
+.contact-submit { width: 100%; background: var(--black); color: var(--white); border: none; padding: 13px; font-family: var(--sans); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; margin-top: 8px; }
+.contact-submit:hover { opacity: 0.75; }
+.contact-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--gray-3); line-height: 1; }
+/* ── MODAL SHIP NOTE ── */
+.modal-ship-note { font-size: 9px; color: var(--gray-3); letter-spacing: 0.08em; text-align: center; margin-top: 10px; }
 
 /* ── CART ── */
 .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.3); z-index: 400; opacity: 0; pointer-events: none; transition: opacity 0.28s; }
@@ -538,9 +559,12 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   .modal-body { overflow-y: visible; padding: 24px 20px 32px; }
   nav { padding: 12px 16px; }
   .logo-main { font-size: 46px; }
-  footer { grid-template-columns: 1fr; gap: 20px; text-align: center; padding: 28px 20px; }
+  footer { grid-template-columns: 1fr; gap: 16px; text-align: center; padding: 28px 20px; }
+  .footer-logo { align-items: center; }
   .footer-copy { text-align: center; }
   .footer-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
+  .footer-legal { gap: 14px; }
+  .contact-modal { padding: 40px 24px 32px; }
 }
 
 @media (max-width: 600px) {
@@ -820,10 +844,23 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
   </div>
   <ul class="footer-links">
     <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="https://www.instagram.com/prolific_vintage_shop" target="_blank" rel="noopener">Contact</a></li>
+    <li><button id="contact-open-btn">Contact</button></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <div class="footer-copy">© 2026 Prolific Vintage</div>
+  <div class="footer-pay">
+    <span class="pay-badge">VISA</span>
+    <span class="pay-badge">Mastercard</span>
+    <span class="pay-badge">AMEX</span>
+    <span class="pay-badge">JCB</span>
+    <!-- TODO: 要入力 その他決済手段 -->
+  </div>
+  <div class="footer-legal">
+    <a href="tokushoho.html">特定商取引法に基づく表記</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="terms.html">利用規約</a>
+    <a href="returns.html">返品ポリシー</a>
+  </div>
 </footer>
 
 <!-- Modal -->
@@ -855,7 +892,25 @@ footer { padding: 36px 40px; display: grid; grid-template-columns: 1fr auto 1fr;
       <div class="modal-label" data-i18n="modal.cond">コンディション</div>
       <p class="modal-cond-text" id="modal-cond"></p>
       <button class="modal-add" id="modal-add">カートに追加</button>
+      <!-- TODO: 要入力 営業日数 -->
+      <p class="modal-ship-note">ご注文確認後【要入力】営業日以内に発送</p>
     </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div class="contact-overlay" id="contact-overlay">
+  <div class="contact-modal">
+    <button class="contact-close" id="contact-close">×</button>
+    <div class="contact-title">Contact</div>
+    <p class="contact-sub">お問い合わせ / Get in touch</p>
+    <!-- TODO: 要入力 Formspree等のaction URL -->
+    <form action="【要入力】" method="POST">
+      <div class="contact-field"><input type="text" name="name" placeholder="お名前 / Name" required></div>
+      <div class="contact-field"><input type="email" name="email" placeholder="メールアドレス / Email" required></div>
+      <div class="contact-field"><textarea name="message" placeholder="メッセージ / Message" required></textarea></div>
+      <button type="submit" class="contact-submit">送信 / Send</button>
+    </form>
   </div>
 </div>
 
@@ -1335,6 +1390,17 @@ function startSlideshow() {
   clearInterval(ssTimer);
   ssTimer = setInterval(() => ssGo(ssIndex + 1), 5000);
 }
+
+// Contact modal
+document.getElementById('contact-open-btn').addEventListener('click', () => {
+  document.getElementById('contact-overlay').classList.add('open');
+});
+document.getElementById('contact-close').addEventListener('click', () => {
+  document.getElementById('contact-overlay').classList.remove('open');
+});
+document.getElementById('contact-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+});
 
 // Apply saved language on load
 applyLang(currentLang);
